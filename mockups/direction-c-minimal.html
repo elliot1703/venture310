@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Venture 310 — Direction C: Minimal Prestige</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --green: #18500F;
+    --cream: #FAF0E7;
+    --deep-forest: #0D2B08;
+    --white: #FFFFFF;
+    --stone: #E4D6CC;
+    --teal: #2A9D8F;
+    --gold: #C9A227;
+    --font-display: 'Cormorant Garamond', Georgia, serif;
+    --font-body: 'DM Sans', system-ui, sans-serif;
+  }
+
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: var(--font-body); color: var(--deep-forest);
+    background: var(--white); overflow-x: hidden;
+  }
+
+  /* ── NAV ─────────────────────────────────────── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; justify-content: center; align-items: center;
+    padding: 2rem clamp(2rem, 5vw, 4rem);
+    background: transparent;
+    transition: background 0.4s ease, padding 0.3s ease;
+  }
+  nav.scrolled {
+    background: rgba(255,255,255,0.95);
+    backdrop-filter: blur(12px);
+    padding: 1.25rem clamp(2rem, 5vw, 4rem);
+    border-bottom: 1px solid var(--stone);
+  }
+
+  .nav-inner {
+    display: flex; justify-content: space-between; align-items: center;
+    width: 100%; max-width: 1100px;
+  }
+
+  .nav-wordmark {
+    font-family: var(--font-display); font-weight: 600;
+    font-size: 1rem; letter-spacing: 0.3em; text-transform: uppercase;
+    color: var(--deep-forest); text-decoration: none;
+    position: relative;
+  }
+  .nav-wordmark::after {
+    content: ''; position: absolute; bottom: -4px; left: 0;
+    width: 100%; height: 1px; background: var(--deep-forest); opacity: 0.3;
+  }
+  .nav-wordmark sup {
+    font-size: 0.55em; vertical-align: super; letter-spacing: 0.05em;
+    color: var(--gold);
+  }
+
+  .nav-cta {
+    font-family: var(--font-body); font-size: 0.72rem; font-weight: 500;
+    letter-spacing: 0.18em; text-transform: uppercase; text-decoration: none;
+    color: var(--deep-forest); opacity: 0.6;
+    transition: opacity 0.2s ease;
+  }
+  .nav-cta:hover { opacity: 1; }
+
+  /* ── HERO ─────────────────────────────────────── */
+  .hero {
+    min-height: 100vh;
+    display: flex; flex-direction: column; justify-content: center; align-items: center;
+    text-align: center;
+    padding: 8rem clamp(2rem, 6vw, 4rem) 6rem;
+    position: relative;
+  }
+
+  .hero-wordmark {
+    font-family: var(--font-display); font-weight: 600;
+    font-size: clamp(4rem, 10vw, 9rem);
+    letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--green); line-height: 1;
+    position: relative;
+    opacity: 0; animation: fadeIn 1.2s ease-out 0.2s forwards;
+  }
+  .hero-wordmark::after {
+    content: ''; position: absolute;
+    bottom: -0.15em; left: 10%; width: 80%;
+    height: 1px; background: var(--green); opacity: 0.25;
+  }
+  .hero-wordmark sup {
+    font-size: 0.35em; vertical-align: super;
+    letter-spacing: 0.05em; color: var(--gold);
+  }
+
+  .hero-tagline {
+    margin-top: 3rem;
+    font-family: var(--font-display); font-style: italic; font-weight: 400;
+    font-size: clamp(1.2rem, 2.2vw, 1.6rem); line-height: 1.5;
+    color: var(--deep-forest); opacity: 0.5;
+    max-width: 500px;
+    opacity: 0; animation: fadeIn 0.8s ease-out 0.8s forwards;
+  }
+
+  .hero-divider {
+    width: 1px; height: 60px; background: var(--stone);
+    margin: 3rem auto;
+    opacity: 0; animation: fadeIn 0.6s ease-out 1.2s forwards;
+  }
+
+  .hero-cta {
+    font-family: var(--font-body); font-size: 0.72rem; font-weight: 600;
+    letter-spacing: 0.25em; text-transform: uppercase; text-decoration: none;
+    color: var(--cream); background: var(--green);
+    padding: 1.1rem 3rem;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    opacity: 0; animation: fadeIn 0.6s ease-out 1.5s forwards;
+  }
+  .hero-cta:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(24,80,15,0.2); }
+
+  .hero-scroll-hint {
+    position: absolute; bottom: 2.5rem; left: 50%; transform: translateX(-50%);
+    font-size: 0.65rem; font-weight: 500; letter-spacing: 0.3em;
+    text-transform: uppercase; color: var(--stone);
+    opacity: 0; animation: fadeIn 0.6s ease-out 2s forwards;
+  }
+
+  /* ── PHILOSOPHY ─────────────────────────────── */
+  .philosophy {
+    padding: clamp(5rem, 10vw, 8rem) clamp(2rem, 6vw, 4rem);
+    text-align: center;
+    background: var(--cream);
+  }
+
+  .philosophy-inner { max-width: 680px; margin: 0 auto; }
+
+  .philosophy p {
+    font-family: var(--font-display); font-weight: 400;
+    font-size: clamp(1.3rem, 2.5vw, 1.8rem); line-height: 1.6;
+    color: var(--deep-forest);
+  }
+  .philosophy p em { font-style: italic; color: var(--green); }
+
+  .philosophy-source {
+    margin-top: 2.5rem;
+    font-size: 0.72rem; font-weight: 500; letter-spacing: 0.2em;
+    text-transform: uppercase; color: var(--stone);
+  }
+
+  /* ── SERVICES ────────────────────────────────── */
+  .services {
+    padding: clamp(5rem, 10vw, 8rem) clamp(2rem, 6vw, 4rem);
+    max-width: 1100px; margin: 0 auto;
+  }
+
+  .services-label {
+    text-align: center; margin-bottom: 4rem;
+    font-size: 0.7rem; font-weight: 500; letter-spacing: 0.3em;
+    text-transform: uppercase; color: var(--stone);
+  }
+
+  .services-list {
+    display: flex; flex-direction: column;
+  }
+
+  .service-row {
+    display: grid; grid-template-columns: 80px 1fr 1fr;
+    gap: 2rem; align-items: baseline;
+    padding: 2.5rem 0;
+    border-bottom: 1px solid var(--stone);
+    cursor: default;
+    transition: padding-left 0.3s ease;
+  }
+  .service-row:first-child { border-top: 1px solid var(--stone); }
+  .service-row:hover { padding-left: 1rem; }
+
+  .service-row .num {
+    font-family: var(--font-display); font-size: 0.9rem; font-weight: 400;
+    color: var(--stone);
+  }
+
+  .service-row h3 {
+    font-family: var(--font-display); font-weight: 600;
+    font-size: clamp(1.4rem, 2.5vw, 2rem); line-height: 1.2;
+    color: var(--deep-forest);
+  }
+
+  .service-row p {
+    font-size: 0.9rem; line-height: 1.65; color: var(--deep-forest); opacity: 0.5;
+    max-width: 350px;
+  }
+
+  /* ── CTA ────────────────────────────────────── */
+  .cta-section {
+    background: var(--green);
+    padding: clamp(5rem, 10vw, 8rem) clamp(2rem, 6vw, 4rem);
+    text-align: center;
+  }
+
+  .cta-section h2 {
+    font-family: var(--font-display); font-weight: 500;
+    font-size: clamp(1.8rem, 3.5vw, 2.8rem); line-height: 1.3;
+    color: var(--cream); max-width: 600px; margin: 0 auto 2.5rem;
+  }
+
+  .cta-section a {
+    display: inline-block;
+    font-family: var(--font-body); font-size: 0.72rem; font-weight: 600;
+    letter-spacing: 0.25em; text-transform: uppercase; text-decoration: none;
+    color: var(--green); background: var(--cream);
+    padding: 1.1rem 3rem;
+    transition: transform 0.2s ease;
+  }
+  .cta-section a:hover { transform: translateY(-2px); }
+
+  /* ── FOOTER ─────────────────────────────────── */
+  footer {
+    padding: 3rem clamp(2rem, 6vw, 4rem);
+    text-align: center;
+    font-size: 0.7rem; color: var(--stone); letter-spacing: 0.08em;
+  }
+  footer a { color: var(--stone); text-decoration: none; margin: 0 1rem; }
+  footer a:hover { color: var(--deep-forest); }
+  footer .footer-line {
+    width: 40px; height: 1px; background: var(--stone);
+    margin: 1rem auto;
+  }
+
+  /* ── ANIMATIONS ─────────────────────────────── */
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  .reveal {
+    opacity: 0; transform: translateY(20px);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+  }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  /* ── RESPONSIVE ─────────────────────────────── */
+  @media (max-width: 768px) {
+    .service-row { grid-template-columns: 1fr; gap: 0.5rem; padding: 2rem 0; }
+    .service-row .num { font-size: 0.75rem; }
+    .service-row:hover { padding-left: 0; }
+    .hero-wordmark { letter-spacing: 0.12em; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ═══ NAVIGATION ═══ -->
+<nav>
+  <div class="nav-inner">
+    <a href="#" class="nav-wordmark">Venture<sup>310</sup></a>
+    <a href="#contact" class="nav-cta">Enquire</a>
+  </div>
+</nav>
+
+<!-- ═══ HERO ═══ -->
+<section class="hero">
+  <div class="hero-wordmark">Venture<sup>310</sup></div>
+  <p class="hero-tagline">Helping businesses scale attention,<br>awareness and profitability</p>
+  <div class="hero-divider"></div>
+  <a href="#contact" class="hero-cta">Book a Strategy Call</a>
+  <span class="hero-scroll-hint">Scroll</span>
+</section>
+
+<!-- ═══ PHILOSOPHY ═══ -->
+<section class="philosophy">
+  <div class="philosophy-inner reveal">
+    <p>We believe every business has a story worth telling. The ones that <em>win</em> are the ones that tell it better than anyone else. We're the team that makes that happen.</p>
+    <div class="philosophy-source">— Venture 310</div>
+  </div>
+</section>
+
+<!-- ═══ SERVICES ═══ -->
+<section class="services" id="services">
+  <div class="services-label reveal">Our Services</div>
+
+  <div class="services-list">
+    <div class="service-row reveal">
+      <span class="num">01</span>
+      <h3>Email Campaigns</h3>
+      <p>Strategy, copywriting, and automation. Sequences that turn cold leads into loyal customers.</p>
+    </div>
+    <div class="service-row reveal">
+      <span class="num">02</span>
+      <h3>Video Production</h3>
+      <p>Brand films, social reels, and testimonial content. From concept through final cut.</p>
+    </div>
+    <div class="service-row reveal">
+      <span class="num">03</span>
+      <h3>Social Media</h3>
+      <p>Platform strategy, content creation, and community management that builds real attention.</p>
+    </div>
+    <div class="service-row reveal">
+      <span class="num">04</span>
+      <h3>Paid Advertising</h3>
+      <p>Meta, Google, and LinkedIn campaigns built on storytelling — not just targeting.</p>
+    </div>
+    <div class="service-row reveal">
+      <span class="num">05</span>
+      <h3>Brand Strategy</h3>
+      <p>Positioning, messaging, and identity that makes you impossible to confuse with anyone else.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ CTA ═══ -->
+<section class="cta-section" id="contact">
+  <h2 class="reveal">Your story deserves to be told properly</h2>
+  <a href="#" class="reveal">Book a Strategy Call</a>
+</section>
+
+<!-- ═══ FOOTER ═══ -->
+<footer>
+  <a href="https://instagram.com/venture310.ae" target="_blank">Instagram</a>
+  <a href="mailto:hello@venture310.ae">Email</a>
+  <div class="footer-line"></div>
+  <span>© 2025 Venture 310 · Dubai, UAE</span>
+</footer>
+
+<script>
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15 });
+  reveals.forEach(el => observer.observe(el));
+
+  // Nav scroll
+  window.addEventListener('scroll', () => {
+    document.querySelector('nav').classList.toggle('scrolled', window.scrollY > 80);
+  });
+</script>
+</body>
+</html>

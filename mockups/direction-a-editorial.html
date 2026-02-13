@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Venture 310 — Direction A: Editorial Magazine</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --green: #18500F;
+    --cream: #FAF0E7;
+    --deep-forest: #0D2B08;
+    --white: #FFFFFF;
+    --stone: #E4D6CC;
+    --teal: #2A9D8F;
+    --gold: #C9A227;
+    --font-display: 'Cormorant Garamond', Georgia, serif;
+    --font-body: 'DM Sans', system-ui, sans-serif;
+  }
+
+  html { scroll-behavior: smooth; }
+  body { font-family: var(--font-body); color: var(--deep-forest); background: var(--white); overflow-x: hidden; }
+
+  /* ── NAV ─────────────────────────────────────── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 1.5rem clamp(2rem, 5vw, 4rem);
+    background: transparent;
+    transition: background 0.4s ease;
+  }
+  nav.scrolled { background: rgba(24, 80, 15, 0.97); }
+
+  .nav-wordmark {
+    font-family: var(--font-display); font-weight: 600;
+    font-size: 1.1rem; letter-spacing: 0.25em; text-transform: uppercase;
+    color: var(--cream); text-decoration: none;
+  }
+  .nav-wordmark sup { font-size: 0.6em; vertical-align: super; letter-spacing: 0.05em; }
+
+  .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+  .nav-links a {
+    font-family: var(--font-body); font-size: 0.8rem; font-weight: 500;
+    letter-spacing: 0.15em; text-transform: uppercase;
+    color: var(--cream); text-decoration: none; opacity: 0.8;
+    transition: opacity 0.2s ease;
+  }
+  .nav-links a:hover { opacity: 1; }
+
+  /* ── HERO ─────────────────────────────────────── */
+  .hero {
+    min-height: 100vh; background: var(--green);
+    display: flex; flex-direction: column; justify-content: center;
+    padding: clamp(6rem, 12vw, 10rem) clamp(2rem, 8vw, 8rem);
+    position: relative;
+  }
+
+  .hero-tag {
+    font-family: var(--font-body); font-size: 0.75rem; font-weight: 500;
+    letter-spacing: 0.3em; text-transform: uppercase;
+    color: var(--stone); margin-bottom: 2.5rem;
+    opacity: 0; animation: fadeUp 0.8s ease-out 0.3s forwards;
+  }
+
+  .hero h1 {
+    font-family: var(--font-display); font-weight: 500;
+    font-size: clamp(3rem, 7vw, 6.5rem);
+    line-height: 1.05; letter-spacing: -0.01em;
+    color: var(--cream); max-width: 900px;
+    opacity: 0; animation: fadeUp 0.8s ease-out 0.5s forwards;
+  }
+
+  .hero-line-accent {
+    width: 80px; height: 1px; background: var(--stone);
+    margin: 3rem 0;
+    opacity: 0; animation: fadeUp 0.8s ease-out 0.7s forwards;
+  }
+
+  .hero-sub {
+    font-family: var(--font-body); font-size: clamp(1rem, 1.5vw, 1.15rem);
+    font-weight: 400; line-height: 1.7;
+    color: var(--cream); opacity: 0.75; max-width: 500px;
+    opacity: 0; animation: fadeUp 0.8s ease-out 0.9s forwards;
+  }
+
+  .hero-cta {
+    display: inline-block; margin-top: 3rem;
+    font-family: var(--font-body); font-size: 0.8rem; font-weight: 600;
+    letter-spacing: 0.2em; text-transform: uppercase; text-decoration: none;
+    color: var(--green); background: var(--cream);
+    padding: 1.1rem 2.5rem;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    opacity: 0; animation: fadeUp 0.8s ease-out 1.1s forwards;
+  }
+  .hero-cta:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(0,0,0,0.15); }
+
+  .hero-issue {
+    position: absolute; bottom: 3rem; right: clamp(2rem, 8vw, 8rem);
+    font-family: var(--font-display); font-size: 8rem; font-weight: 700;
+    color: var(--cream); opacity: 0.04; line-height: 1;
+  }
+
+  /* ── EDITORIAL DIVIDER ──────────────────────── */
+  .editorial-strip {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 1.5rem clamp(2rem, 8vw, 8rem);
+    border-top: 1px solid var(--stone); border-bottom: 1px solid var(--stone);
+    background: var(--white);
+  }
+  .editorial-strip span {
+    font-family: var(--font-body); font-size: 0.7rem; font-weight: 500;
+    letter-spacing: 0.2em; text-transform: uppercase; color: var(--stone);
+  }
+
+  /* ── SERVICES ────────────────────────────────── */
+  .services {
+    padding: clamp(5rem, 10vw, 8rem) clamp(2rem, 8vw, 8rem);
+    background: var(--white);
+  }
+
+  .services-header {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 4rem;
+    align-items: end; margin-bottom: 5rem;
+  }
+
+  .services-header h2 {
+    font-family: var(--font-display); font-weight: 500;
+    font-size: clamp(2rem, 4vw, 3.5rem); line-height: 1.15;
+    letter-spacing: -0.01em; color: var(--deep-forest);
+  }
+
+  .services-header p {
+    font-size: 1rem; line-height: 1.7; color: var(--deep-forest); opacity: 0.6;
+    max-width: 400px; justify-self: end;
+  }
+
+  .services-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 0; border-top: 1px solid var(--stone);
+  }
+
+  .service-card {
+    padding: 3rem 2.5rem; border-right: 1px solid var(--stone);
+    border-bottom: 1px solid var(--stone);
+    transition: background 0.3s ease;
+    cursor: default;
+  }
+  .service-card:nth-child(3n) { border-right: none; }
+  .service-card:hover { background: var(--cream); }
+
+  .service-number {
+    font-family: var(--font-display); font-size: 0.85rem; font-weight: 400;
+    color: var(--stone); margin-bottom: 2rem;
+  }
+
+  .service-card h3 {
+    font-family: var(--font-display); font-weight: 600;
+    font-size: 1.6rem; line-height: 1.2; letter-spacing: -0.01em;
+    color: var(--deep-forest); margin-bottom: 1rem;
+  }
+
+  .service-card p {
+    font-size: 0.9rem; line-height: 1.65; color: var(--deep-forest); opacity: 0.55;
+  }
+
+  .service-arrow {
+    display: inline-block; margin-top: 2rem;
+    font-size: 1.2rem; color: var(--green); opacity: 0;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+  }
+  .service-card:hover .service-arrow { opacity: 1; transform: translateX(4px); }
+
+  /* ── CTA STRIP ──────────────────────────────── */
+  .cta-strip {
+    background: var(--green);
+    padding: clamp(4rem, 8vw, 6rem) clamp(2rem, 8vw, 8rem);
+    display: flex; justify-content: space-between; align-items: center;
+    gap: 3rem;
+  }
+
+  .cta-strip h2 {
+    font-family: var(--font-display); font-weight: 500;
+    font-size: clamp(1.8rem, 3.5vw, 2.8rem); line-height: 1.2;
+    color: var(--cream); max-width: 600px;
+  }
+
+  .cta-strip a {
+    flex-shrink: 0;
+    font-family: var(--font-body); font-size: 0.8rem; font-weight: 600;
+    letter-spacing: 0.2em; text-transform: uppercase; text-decoration: none;
+    color: var(--green); background: var(--cream);
+    padding: 1.1rem 2.5rem;
+    transition: transform 0.2s ease;
+  }
+  .cta-strip a:hover { transform: translateY(-2px); }
+
+  /* ── FOOTER ─────────────────────────────────── */
+  footer {
+    padding: 3rem clamp(2rem, 8vw, 8rem);
+    border-top: 1px solid var(--stone);
+    display: flex; justify-content: space-between; align-items: center;
+    font-size: 0.75rem; color: var(--stone); letter-spacing: 0.05em;
+  }
+
+  /* ── ANIMATIONS ─────────────────────────────── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .reveal {
+    opacity: 0; transform: translateY(30px);
+    transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+  }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  /* ── RESPONSIVE ─────────────────────────────── */
+  @media (max-width: 768px) {
+    .nav-links { display: none; }
+    .hero-issue { display: none; }
+    .services-header { grid-template-columns: 1fr; gap: 1.5rem; }
+    .services-header p { justify-self: start; }
+    .services-grid { grid-template-columns: 1fr; }
+    .service-card { border-right: none; }
+    .editorial-strip { display: none; }
+    .cta-strip { flex-direction: column; text-align: center; }
+    footer { flex-direction: column; gap: 1rem; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ═══ NAVIGATION ═══ -->
+<nav>
+  <a href="#" class="nav-wordmark">Venture<sup>310</sup></a>
+  <ul class="nav-links">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#results">Results</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- ═══ HERO ═══ -->
+<section class="hero">
+  <p class="hero-tag">Dubai Marketing Agency</p>
+  <h1>Stories that scale<br>attention, awareness<br>& profitability</h1>
+  <div class="hero-line-accent"></div>
+  <p class="hero-sub">We help ambitious businesses craft narratives that cut through noise — turning audiences into customers and customers into advocates.</p>
+  <a href="#contact" class="hero-cta">Book a Strategy Call</a>
+  <div class="hero-issue">01</div>
+</section>
+
+<!-- ═══ EDITORIAL STRIP ═══ -->
+<div class="editorial-strip">
+  <span>Venture 310 — Dubai, UAE</span>
+  <span>Marketing &middot; Storytelling &middot; Growth</span>
+  <span>Est. 2024</span>
+</div>
+
+<!-- ═══ SERVICES ═══ -->
+<section class="services" id="services">
+  <div class="services-header reveal">
+    <h2>What we do<br>for ambitious brands</h2>
+    <p>Every service is built around one principle: your story is your greatest competitive advantage. We just make sure it reaches the right people.</p>
+  </div>
+
+  <div class="services-grid">
+    <div class="service-card reveal">
+      <span class="service-number">01</span>
+      <h3>Email<br>Campaigns</h3>
+      <p>Sequences that nurture leads from cold to converted. Strategy, copywriting, and automation that feels personal at scale.</p>
+      <span class="service-arrow">→</span>
+    </div>
+
+    <div class="service-card reveal">
+      <span class="service-number">02</span>
+      <h3>Video<br>Production</h3>
+      <p>Brand films, social content, and testimonial pieces that stop the scroll. From concept through to final cut.</p>
+      <span class="service-arrow">→</span>
+    </div>
+
+    <div class="service-card reveal">
+      <span class="service-number">03</span>
+      <h3>Social Media<br>Management</h3>
+      <p>Platform strategy, content creation, and community management that builds genuine attention — not vanity metrics.</p>
+      <span class="service-arrow">→</span>
+    </div>
+
+    <div class="service-card reveal">
+      <span class="service-number">04</span>
+      <h3>Brand<br>Strategy</h3>
+      <p>Positioning, messaging, and visual identity that makes your brand impossible to confuse with anyone else.</p>
+      <span class="service-arrow">→</span>
+    </div>
+
+    <div class="service-card reveal">
+      <span class="service-number">05</span>
+      <h3>Paid<br>Advertising</h3>
+      <p>Meta, Google, and LinkedIn campaigns built on storytelling — not just targeting. Creative that earns attention before spending on it.</p>
+      <span class="service-arrow">→</span>
+    </div>
+
+    <div class="service-card reveal">
+      <span class="service-number">06</span>
+      <h3>Content<br>Strategy</h3>
+      <p>Editorial calendars, pillar content, and distribution plans that compound over time. Your story, everywhere it matters.</p>
+      <span class="service-arrow">→</span>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ CTA STRIP ═══ -->
+<section class="cta-strip" id="contact">
+  <h2>Ready to turn your story into your strongest growth channel?</h2>
+  <a href="#">Book a Call</a>
+</section>
+
+<!-- ═══ FOOTER ═══ -->
+<footer>
+  <span>© 2025 Venture 310. All rights reserved.</span>
+  <span>Dubai, UAE</span>
+</footer>
+
+<script>
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), i * 100);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15 });
+  reveals.forEach(el => observer.observe(el));
+
+  // Nav scroll state
+  window.addEventListener('scroll', () => {
+    document.querySelector('nav').classList.toggle('scrolled', window.scrollY > 50);
+  });
+</script>
+</body>
+</html>

@@ -1,0 +1,754 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Venture 310 — Dubai Marketing Agency</title>
+<meta name="description" content="Helping businesses scale attention, awareness and profitability through storytelling. Dubai-based marketing agency.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+  /* ═══════════════════════════════════════════════
+     VENTURE 310 — LANDING PAGE
+     Combined: B hero + C cleanliness + A services
+     ═══════════════════════════════════════════════ */
+
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --green: #18500F;
+    --cream: #FAF0E7;
+    --deep-forest: #0D2B08;
+    --white: #FFFFFF;
+    --stone: #E4D6CC;
+    --teal: #2A9D8F;
+    --gold: #C9A227;
+    --font-display: 'Cormorant Garamond', Georgia, serif;
+    --font-body: 'DM Sans', system-ui, sans-serif;
+    --section-padding: clamp(5rem, 10vw, 8rem);
+    --side-padding: clamp(2rem, 6vw, 6rem);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--font-body);
+    color: var(--deep-forest);
+    background: var(--white);
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ═══ NAVIGATION ════════════════════════════════ */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 1.5rem var(--side-padding);
+    background: transparent;
+    transition: background 0.5s ease, box-shadow 0.5s ease;
+  }
+  nav.scrolled {
+    background: rgba(24, 80, 15, 0.97);
+    box-shadow: 0 1px 0 rgba(250,240,231,0.08);
+  }
+
+  .nav-wordmark {
+    font-family: var(--font-display); font-weight: 600;
+    font-size: 1.05rem; letter-spacing: 0.28em; text-transform: uppercase;
+    color: var(--cream); text-decoration: none;
+    position: relative;
+  }
+  .nav-wordmark::after {
+    content: ''; position: absolute; bottom: -3px; left: 0;
+    width: 72%; height: 1px; background: var(--cream); opacity: 0.25;
+  }
+  .nav-wordmark sup { font-size: 0.55em; vertical-align: super; letter-spacing: 0.05em; }
+
+  .nav-right { display: flex; align-items: center; gap: 3rem; }
+
+  .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+  .nav-links a {
+    font-size: 0.75rem; font-weight: 500; letter-spacing: 0.15em;
+    text-transform: uppercase; color: var(--cream); text-decoration: none;
+    opacity: 0.65; transition: opacity 0.2s ease;
+  }
+  .nav-links a:hover { opacity: 1; }
+
+  .nav-cta {
+    font-size: 0.7rem; font-weight: 600; letter-spacing: 0.15em;
+    text-transform: uppercase; text-decoration: none;
+    color: var(--green); background: var(--cream);
+    padding: 0.7rem 1.5rem;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+  .nav-cta:hover { transform: translateY(-1px); box-shadow: 0 4px 15px rgba(0,0,0,0.15); }
+
+  /* ═══ HERO — SPLIT SCREEN ══════════════════════ */
+  /* Left: green with headline. Right: full-height image */
+  .hero {
+    min-height: 100vh;
+    display: grid; grid-template-columns: 1fr 1fr;
+  }
+
+  .hero-content {
+    background: var(--green);
+    display: flex; flex-direction: column; justify-content: center;
+    padding: 8rem var(--side-padding) 5rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* Subtle decorative number */
+  .hero-content::before {
+    content: '310';
+    position: absolute; bottom: -0.12em; right: -0.02em;
+    font-family: var(--font-display); font-weight: 700;
+    font-size: clamp(14rem, 18vw, 20rem);
+    color: var(--cream); opacity: 0.03; line-height: 1;
+    pointer-events: none;
+  }
+
+  .hero-tag {
+    display: inline-flex; align-items: center; gap: 0.75rem;
+    margin-bottom: 2.5rem;
+  }
+  .hero-tag-line { width: 36px; height: 1px; background: var(--cream); opacity: 0.3; }
+  .hero-tag span {
+    font-size: 0.68rem; font-weight: 500; letter-spacing: 0.3em;
+    text-transform: uppercase; color: var(--cream); opacity: 0.5;
+  }
+
+  .hero h1 {
+    font-family: var(--font-display); font-weight: 500;
+    font-size: clamp(2.6rem, 4.5vw, 4.2rem);
+    line-height: 1.1; letter-spacing: -0.01em;
+    color: var(--cream);
+  }
+
+  /* Each word wraps in a span for the reveal animation */
+  .hero h1 .word {
+    display: inline-block;
+    opacity: 0; transform: translateY(20px);
+    animation: wordReveal 0.6s ease-out forwards;
+  }
+  .hero h1 em {
+    font-style: italic; font-weight: 400;
+  }
+
+  .hero-line {
+    width: 60px; height: 1px; background: var(--cream); opacity: 0.2;
+    margin: 2.5rem 0;
+  }
+
+  .hero-sub {
+    font-size: clamp(0.95rem, 1.2vw, 1.05rem); line-height: 1.7;
+    color: var(--cream); opacity: 0.6; max-width: 420px;
+  }
+
+  .hero-buttons {
+    display: flex; gap: 1rem; margin-top: 2.5rem; flex-wrap: wrap;
+  }
+
+  .btn-primary {
+    display: inline-block;
+    font-family: var(--font-body); font-size: 0.75rem; font-weight: 600;
+    letter-spacing: 0.18em; text-transform: uppercase; text-decoration: none;
+    color: var(--green); background: var(--cream);
+    padding: 1rem 2.2rem;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(0,0,0,0.2); }
+
+  .btn-ghost {
+    display: inline-block;
+    font-family: var(--font-body); font-size: 0.75rem; font-weight: 500;
+    letter-spacing: 0.18em; text-transform: uppercase; text-decoration: none;
+    color: var(--cream); padding: 1rem 2.2rem;
+    border: 1px solid rgba(250,240,231,0.2);
+    transition: border-color 0.2s ease, background 0.2s ease;
+  }
+  .btn-ghost:hover { border-color: rgba(250,240,231,0.5); background: rgba(250,240,231,0.05); }
+
+  /* Hero image panel */
+  .hero-image {
+    position: relative; overflow: hidden;
+    background: var(--stone);
+  }
+  .hero-image img {
+    width: 100%; height: 100%; object-fit: cover;
+    transform: scale(1.08);
+    transition: transform 0.1s linear;
+    will-change: transform;
+  }
+  /* Subtle green overlay on image */
+  .hero-image::after {
+    content: ''; position: absolute; inset: 0;
+    background: linear-gradient(
+      135deg,
+      rgba(24, 80, 15, 0.15) 0%,
+      rgba(13, 43, 8, 0.3) 100%
+    );
+    pointer-events: none;
+  }
+
+  /* ═══ EDITORIAL STRIP ══════════════════════════ */
+  .editorial-strip {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 1.2rem var(--side-padding);
+    border-bottom: 1px solid var(--stone);
+    background: var(--white);
+  }
+  .editorial-strip span {
+    font-size: 0.65rem; font-weight: 500; letter-spacing: 0.25em;
+    text-transform: uppercase; color: var(--stone);
+  }
+
+  /* ═══ SERVICES — EDITORIAL GRID (from A) ═══════ */
+  .services {
+    padding: var(--section-padding) var(--side-padding);
+    background: var(--white);
+  }
+
+  .services-header {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 4rem;
+    align-items: end; margin-bottom: 4rem;
+  }
+
+  .section-tag {
+    display: inline-flex; align-items: center; gap: 0.75rem;
+    margin-bottom: 1.5rem;
+  }
+  .section-tag-line { width: 36px; height: 1px; background: var(--green); }
+  .section-tag span {
+    font-size: 0.65rem; font-weight: 600; letter-spacing: 0.3em;
+    text-transform: uppercase; color: var(--green);
+  }
+
+  .services-header h2 {
+    font-family: var(--font-display); font-weight: 500;
+    font-size: clamp(2rem, 3.8vw, 3.2rem); line-height: 1.15;
+    color: var(--deep-forest);
+  }
+
+  .services-header-right {
+    justify-self: end; max-width: 380px;
+  }
+  .services-header-right p {
+    font-size: 0.95rem; line-height: 1.7; color: var(--deep-forest); opacity: 0.5;
+  }
+
+  .services-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    border-top: 1px solid var(--stone);
+  }
+
+  .service-card {
+    padding: 2.8rem 2.2rem;
+    border-right: 1px solid var(--stone);
+    border-bottom: 1px solid var(--stone);
+    position: relative;
+    cursor: default;
+    transition: background 0.35s ease;
+  }
+  .service-card:nth-child(3n) { border-right: none; }
+  .service-card:hover { background: var(--cream); }
+
+  .service-num {
+    font-family: var(--font-display); font-size: 0.85rem; font-weight: 400;
+    color: var(--stone); margin-bottom: 1.8rem;
+  }
+
+  .service-card h3 {
+    font-family: var(--font-display); font-weight: 600;
+    font-size: 1.5rem; line-height: 1.2;
+    color: var(--deep-forest); margin-bottom: 0.9rem;
+  }
+
+  .service-card p {
+    font-size: 0.88rem; line-height: 1.65; color: var(--deep-forest); opacity: 0.5;
+  }
+
+  .service-arrow {
+    display: inline-block; margin-top: 1.8rem;
+    font-size: 1.1rem; color: var(--green);
+    opacity: 0; transform: translateX(-4px);
+    transition: opacity 0.25s ease, transform 0.25s ease;
+  }
+  .service-card:hover .service-arrow { opacity: 1; transform: translateX(0); }
+
+  /* ═══ ABOUT — SPLIT LAYOUT ═════════════════════ */
+  .about {
+    display: grid; grid-template-columns: 1fr 1fr;
+    min-height: 70vh;
+  }
+
+  .about-image {
+    position: relative; overflow: hidden;
+    background: var(--stone);
+  }
+  .about-image img {
+    width: 100%; height: 100%; object-fit: cover;
+  }
+
+  .about-content {
+    display: flex; flex-direction: column; justify-content: center;
+    padding: var(--section-padding) var(--side-padding);
+    background: var(--cream);
+  }
+
+  .about-content h2 {
+    font-family: var(--font-display); font-weight: 500;
+    font-size: clamp(1.8rem, 3vw, 2.6rem); line-height: 1.2;
+    color: var(--deep-forest); margin-bottom: 2rem;
+  }
+
+  .about-content p {
+    font-size: 0.95rem; line-height: 1.75; color: var(--deep-forest); opacity: 0.6;
+    max-width: 460px; margin-bottom: 1rem;
+  }
+
+  .about-signature {
+    margin-top: 1.5rem;
+    font-family: var(--font-display); font-style: italic;
+    font-size: 1.1rem; color: var(--green);
+  }
+
+  /* ═══ RESULTS STRIP ════════════════════════════ */
+  .results {
+    background: var(--green);
+    padding: clamp(3.5rem, 6vw, 5rem) var(--side-padding);
+  }
+
+  .results-inner {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 2rem;
+    max-width: 1000px; margin: 0 auto; text-align: center;
+  }
+
+  .result-item {}
+
+  .result-number {
+    font-family: var(--font-display); font-weight: 700;
+    font-size: clamp(2.2rem, 4vw, 3.2rem); color: var(--cream); line-height: 1;
+  }
+  .result-number .counter-suffix {
+    font-size: 0.7em; font-weight: 500;
+  }
+
+  .result-label {
+    margin-top: 0.6rem;
+    font-size: 0.75rem; font-weight: 400; letter-spacing: 0.05em;
+    color: var(--cream); opacity: 0.5; line-height: 1.4;
+  }
+
+  .results-divider {
+    grid-column: 1 / -1;
+    height: 1px; background: var(--cream); opacity: 0.08;
+    margin: 0.5rem 0;
+  }
+
+  /* ═══ TESTIMONIAL ══════════════════════════════ */
+  .testimonial {
+    padding: var(--section-padding) var(--side-padding);
+    text-align: center; background: var(--white);
+  }
+
+  .testimonial-inner { max-width: 700px; margin: 0 auto; }
+
+  .testimonial blockquote {
+    font-family: var(--font-display); font-style: italic; font-weight: 400;
+    font-size: clamp(1.3rem, 2.5vw, 1.8rem); line-height: 1.55;
+    color: var(--deep-forest);
+  }
+
+  .testimonial cite {
+    display: block; margin-top: 2rem;
+    font-family: var(--font-body); font-style: normal;
+    font-size: 0.78rem; font-weight: 500; letter-spacing: 0.15em;
+    text-transform: uppercase; color: var(--stone);
+  }
+
+  /* ═══ CTA SECTION ══════════════════════════════ */
+  .cta-section {
+    background: var(--green);
+    padding: clamp(5rem, 10vw, 8rem) var(--side-padding);
+    text-align: center;
+  }
+
+  .cta-section h2 {
+    font-family: var(--font-display); font-weight: 500;
+    font-size: clamp(2rem, 4vw, 3.2rem); line-height: 1.2;
+    color: var(--cream); max-width: 650px; margin: 0 auto 1rem;
+  }
+
+  .cta-section .cta-sub {
+    font-size: 0.95rem; line-height: 1.65;
+    color: var(--cream); opacity: 0.5; max-width: 440px; margin: 0 auto 2.5rem;
+  }
+
+  .cta-section .btn-primary {
+    font-size: 0.78rem; padding: 1.15rem 2.8rem;
+  }
+
+  /* ═══ FOOTER ═══════════════════════════════════ */
+  footer {
+    padding: 3rem var(--side-padding);
+    display: flex; justify-content: space-between; align-items: center;
+    border-top: 1px solid var(--stone);
+  }
+
+  .footer-wordmark {
+    font-family: var(--font-display); font-weight: 600;
+    font-size: 0.85rem; letter-spacing: 0.25em; text-transform: uppercase;
+    color: var(--deep-forest); text-decoration: none;
+  }
+  .footer-wordmark sup { font-size: 0.55em; vertical-align: super; }
+
+  .footer-links {
+    display: flex; gap: 2rem; list-style: none;
+  }
+  .footer-links a {
+    font-size: 0.72rem; font-weight: 500; letter-spacing: 0.1em;
+    color: var(--stone); text-decoration: none;
+    transition: color 0.2s ease;
+  }
+  .footer-links a:hover { color: var(--deep-forest); }
+
+  .footer-copy {
+    font-size: 0.68rem; color: var(--stone); letter-spacing: 0.05em;
+  }
+
+  /* ═══ ANIMATIONS ═══════════════════════════════ */
+  @keyframes wordReveal {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .reveal {
+    opacity: 0; transform: translateY(28px);
+    transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+  }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  /* Stagger children */
+  .stagger-children > .reveal:nth-child(1) { transition-delay: 0s; }
+  .stagger-children > .reveal:nth-child(2) { transition-delay: 0.08s; }
+  .stagger-children > .reveal:nth-child(3) { transition-delay: 0.16s; }
+  .stagger-children > .reveal:nth-child(4) { transition-delay: 0.24s; }
+  .stagger-children > .reveal:nth-child(5) { transition-delay: 0.32s; }
+  .stagger-children > .reveal:nth-child(6) { transition-delay: 0.40s; }
+
+  /* ═══ RESPONSIVE ═══════════════════════════════ */
+  @media (max-width: 1024px) {
+    .services-grid { grid-template-columns: repeat(2, 1fr); }
+    .service-card:nth-child(2n) { border-right: none; }
+    .service-card:nth-child(3) { border-right: 1px solid var(--stone); }
+    .results-inner { grid-template-columns: repeat(2, 1fr); gap: 2.5rem; }
+  }
+
+  @media (max-width: 768px) {
+    .nav-links { display: none; }
+    .hero { grid-template-columns: 1fr; }
+    .hero-image { min-height: 50vh; order: -1; }
+    .hero-content { padding: 4rem var(--side-padding) 5rem; }
+    .editorial-strip { display: none; }
+    .services-header { grid-template-columns: 1fr; gap: 1.5rem; }
+    .services-header-right { justify-self: start; }
+    .services-grid { grid-template-columns: 1fr; }
+    .service-card { border-right: none !important; }
+    .about { grid-template-columns: 1fr; }
+    .about-image { min-height: 40vh; }
+    .results-inner { grid-template-columns: 1fr 1fr; }
+    footer { flex-direction: column; gap: 1.5rem; text-align: center; }
+    .footer-links { justify-content: center; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════════
+     NAVIGATION
+     ═══════════════════════════════════════════════ -->
+<nav>
+  <a href="#" class="nav-wordmark">Venture<sup>310</sup></a>
+  <div class="nav-right">
+    <ul class="nav-links">
+      <li><a href="#services">Services</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#results">Results</a></li>
+    </ul>
+    <a href="#contact" class="nav-cta">Book a Call</a>
+  </div>
+</nav>
+
+<!-- ═══════════════════════════════════════════════
+     HERO — Split screen: green content + full-height image
+     ═══════════════════════════════════════════════ -->
+<section class="hero">
+  <div class="hero-content">
+    <div class="hero-tag">
+      <span class="hero-tag-line"></span>
+      <span>Dubai Marketing Agency</span>
+    </div>
+
+    <h1 id="hero-headline">Your story is your greatest competitive advantage</h1>
+
+    <div class="hero-line"></div>
+
+    <p class="hero-sub">We help ambitious businesses craft narratives that cut through noise — turning audiences into customers and customers into advocates.</p>
+
+    <div class="hero-buttons">
+      <a href="#contact" class="btn-primary">Book a Strategy Call</a>
+      <a href="#services" class="btn-ghost">Our Services</a>
+    </div>
+  </div>
+
+  <div class="hero-image">
+    <!-- Dubai architectural image — swap with real photo -->
+    <img src="https://images.unsplash.com/photo-1512453979798-5ea266f8880c?w=1200&q=85&auto=format" alt="Dubai skyline architecture" id="hero-img">
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════
+     EDITORIAL STRIP
+     ═══════════════════════════════════════════════ -->
+<div class="editorial-strip">
+  <span>Venture 310 — Dubai, UAE</span>
+  <span>Marketing · Storytelling · Growth</span>
+  <span>Est. 2024</span>
+</div>
+
+<!-- ═══════════════════════════════════════════════
+     SERVICES — Editorial grid with hover animation
+     Placeholder services — swap during call with Conrad
+     ═══════════════════════════════════════════════ -->
+<section class="services" id="services">
+  <div class="services-header reveal">
+    <div>
+      <div class="section-tag">
+        <span class="section-tag-line"></span>
+        <span>What We Do</span>
+      </div>
+      <h2>Full-spectrum marketing<br>for brands that refuse<br>to blend in</h2>
+    </div>
+    <div class="services-header-right">
+      <p>Every service is built around one principle: your story is your greatest competitive advantage. We make sure it reaches the right people.</p>
+    </div>
+  </div>
+
+  <div class="services-grid stagger-children">
+    <!-- SERVICE 1 -->
+    <div class="service-card reveal">
+      <span class="service-num">01</span>
+      <h3>Email<br>Campaigns</h3>
+      <p>Sequences that nurture leads from cold to converted. Strategy, copywriting, and automation that feels personal at scale.</p>
+      <span class="service-arrow">→</span>
+    </div>
+
+    <!-- SERVICE 2 -->
+    <div class="service-card reveal">
+      <span class="service-num">02</span>
+      <h3>Video<br>Production</h3>
+      <p>Brand films, social content, and testimonial pieces that stop the scroll. From concept through final cut.</p>
+      <span class="service-arrow">→</span>
+    </div>
+
+    <!-- SERVICE 3 -->
+    <div class="service-card reveal">
+      <span class="service-num">03</span>
+      <h3>Social Media<br>Management</h3>
+      <p>Platform strategy, content creation, and community management that builds genuine attention — not vanity metrics.</p>
+      <span class="service-arrow">→</span>
+    </div>
+
+    <!-- SERVICE 4 -->
+    <div class="service-card reveal">
+      <span class="service-num">04</span>
+      <h3>Brand<br>Strategy</h3>
+      <p>Positioning, messaging, and visual identity that makes your brand impossible to confuse with anyone else.</p>
+      <span class="service-arrow">→</span>
+    </div>
+
+    <!-- SERVICE 5 -->
+    <div class="service-card reveal">
+      <span class="service-num">05</span>
+      <h3>Paid<br>Advertising</h3>
+      <p>Meta, Google, and LinkedIn campaigns built on storytelling — not just targeting. Creative that earns attention.</p>
+      <span class="service-arrow">→</span>
+    </div>
+
+    <!-- SERVICE 6 -->
+    <div class="service-card reveal">
+      <span class="service-num">06</span>
+      <h3>Content<br>Strategy</h3>
+      <p>Editorial calendars, pillar content, and distribution plans that compound over time. Your story, everywhere it matters.</p>
+      <span class="service-arrow">→</span>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════
+     ABOUT — Split layout: image + story
+     ═══════════════════════════════════════════════ -->
+<section class="about" id="about">
+  <div class="about-image">
+    <!-- Replace with Conrad / team photo -->
+    <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=1000&q=85&auto=format" alt="Modern workspace" loading="lazy">
+  </div>
+
+  <div class="about-content">
+    <div class="section-tag reveal">
+      <span class="section-tag-line"></span>
+      <span>Our Story</span>
+    </div>
+
+    <h2 class="reveal">Built in Dubai.<br>Driven by storytelling.</h2>
+
+    <p class="reveal">Venture 310 was founded on a simple observation: the businesses that win aren't always the biggest or the best-funded. They're the ones that tell their story better than anyone else.</p>
+
+    <p class="reveal">We're a team of strategists, creatives, and operators who believe that great marketing starts with understanding — not guessing. Every campaign we run, every piece of content we create, is built on the foundation of your unique narrative.</p>
+
+    <div class="about-signature reveal">— Conrad, Founder</div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════
+     RESULTS — Stats strip + testimonial
+     Numbers are placeholders — swap with real data
+     ═══════════════════════════════════════════════ -->
+<section class="results" id="results">
+  <div class="results-inner">
+    <div class="result-item reveal">
+      <div class="result-number"><span class="counter" data-target="47">0</span><span class="counter-suffix">%</span></div>
+      <div class="result-label">Avg. increase in<br>qualified leads</div>
+    </div>
+    <div class="result-item reveal">
+      <div class="result-number"><span class="counter" data-target="3.2" data-decimals="1">0</span><span class="counter-suffix">×</span></div>
+      <div class="result-label">Return on<br>ad spend</div>
+    </div>
+    <div class="result-item reveal">
+      <div class="result-number"><span class="counter" data-target="12">0</span><span class="counter-suffix">+</span></div>
+      <div class="result-label">Brands scaled<br>in the Gulf</div>
+    </div>
+    <div class="result-item reveal">
+      <div class="result-number"><span class="counter" data-target="90">0</span><span class="counter-suffix">d</span></div>
+      <div class="result-label">Average time<br>to see results</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ TESTIMONIAL ═══ -->
+<section class="testimonial">
+  <div class="testimonial-inner reveal">
+    <blockquote>"Venture 310 didn't just run our campaigns — they understood our story and told it better than we ever could. The results speak for themselves."</blockquote>
+    <cite>Client Name — Company Name</cite>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════
+     CTA — Final conversion section
+     ═══════════════════════════════════════════════ -->
+<section class="cta-section" id="contact">
+  <h2 class="reveal">Ready to turn your story into your strongest growth channel?</h2>
+  <p class="cta-sub reveal">Book a free strategy call. We'll map out exactly how storytelling can drive measurable growth for your business.</p>
+  <a href="#" class="btn-primary reveal">Book a Strategy Call</a>
+</section>
+
+<!-- ═══════════════════════════════════════════════
+     FOOTER
+     ═══════════════════════════════════════════════ -->
+<footer>
+  <a href="#" class="footer-wordmark">Venture<sup>310</sup></a>
+  <ul class="footer-links">
+    <li><a href="https://instagram.com/venture310.ae" target="_blank">Instagram</a></li>
+    <li><a href="mailto:hello@venture310.ae">Email</a></li>
+    <li><a href="#services">Services</a></li>
+  </ul>
+  <span class="footer-copy">© 2025 Venture 310. Dubai, UAE.</span>
+</footer>
+
+<!-- ═══════════════════════════════════════════════
+     SCRIPTS — Animations + interactions
+     ═══════════════════════════════════════════════ -->
+<script>
+  // ── Hero headline word-by-word reveal ──
+  (function() {
+    const headline = document.getElementById('hero-headline');
+    const text = headline.textContent;
+    const words = text.split(' ');
+    headline.innerHTML = words.map((word, i) =>
+      `<span class="word" style="animation-delay: ${0.3 + i * 0.08}s">${word}</span> `
+    ).join('');
+  })();
+
+  // ── Hero image parallax ──
+  const heroImg = document.getElementById('hero-img');
+  let ticking = false;
+
+  function updateParallax() {
+    const scrolled = window.pageYOffset;
+    const heroHeight = window.innerHeight;
+    if (scrolled < heroHeight) {
+      const offset = scrolled * 0.15;
+      heroImg.style.transform = `scale(1.08) translateY(${offset}px)`;
+    }
+    ticking = false;
+  }
+
+  // ── Scroll reveal ──
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+  document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+  // ── Counter animation ──
+  const counterObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const el = entry.target;
+        const target = parseFloat(el.dataset.target);
+        const decimals = parseInt(el.dataset.decimals) || 0;
+        const duration = 1800;
+        const start = performance.now();
+
+        function easeOutExpo(t) {
+          return t === 1 ? 1 : 1 - Math.pow(2, -10 * t);
+        }
+
+        function tick(now) {
+          const elapsed = now - start;
+          const progress = Math.min(elapsed / duration, 1);
+          const eased = easeOutExpo(progress);
+          const current = eased * target;
+          el.textContent = decimals > 0
+            ? current.toFixed(decimals)
+            : Math.round(current);
+          if (progress < 1) requestAnimationFrame(tick);
+        }
+
+        requestAnimationFrame(tick);
+        counterObserver.unobserve(el);
+      }
+    });
+  }, { threshold: 0.5 });
+
+  document.querySelectorAll('.counter').forEach(el => counterObserver.observe(el));
+
+  // ── Nav scroll state ──
+  window.addEventListener('scroll', () => {
+    document.querySelector('nav').classList.toggle('scrolled', window.scrollY > 60);
+
+    if (!ticking) {
+      requestAnimationFrame(updateParallax);
+      ticking = true;
+    }
+  }, { passive: true });
+</script>
+</body>
+</html>
