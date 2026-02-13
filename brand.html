@@ -1,0 +1,907 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VENTURE 310 — Visual Brand Guidelines</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    /* ═══ RESET ═══ */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --green: #18500F;
+      --cream: #FAF0E7;
+      --deep-forest: #0D2B08;
+      --white: #FFFFFF;
+      --stone: #E4D6CC;
+      --teal: #2A9D8F;
+      --gold: #C9A227;
+      --bg: #FFFFFF;
+      --fg: #0D2B08;
+      --muted: #E4D6CC;
+      --muted-text: #8A7E74;
+      --card: #FAFAF8;
+      --secondary: #F5F0EB;
+      --font-display: 'Cormorant Garamond', Georgia, serif;
+      --font-body: 'DM Sans', system-ui, sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+      --sp-1: 8px; --sp-2: 16px; --sp-3: 24px; --sp-4: 32px;
+      --sp-5: 40px; --sp-6: 48px; --sp-8: 64px; --sp-10: 80px;
+      --sp-12: 96px; --sp-15: 120px;
+    }
+
+    html { font-size: 16px; -webkit-font-smoothing: antialiased; }
+    body { font-family: var(--font-body); background: var(--bg); color: var(--fg); line-height: 1.6; }
+    ::selection { background: var(--gold); color: var(--white); }
+
+    /* ═══ LAYOUT ═══ */
+    .page { max-width: 1280px; margin: 0 auto; padding: var(--sp-10) var(--sp-3); }
+    @media (min-width: 768px) { .page { padding: var(--sp-10) var(--sp-4); } }
+    @media (min-width: 1024px) { .page { padding: var(--sp-10) var(--sp-8); } }
+    section { margin-bottom: var(--sp-15); }
+
+    /* ═══ SCROLL PROGRESS ═══ */
+    .scroll-progress { position: fixed; top: 0; left: 0; height: 3px; background: var(--green); z-index: 1000; width: 0; transition: width 0.1s linear; }
+
+    /* ═══ SECTION INDICATOR ═══ */
+    .section-indicator {
+      position: fixed; bottom: var(--sp-3); right: var(--sp-3);
+      font-family: var(--font-mono); font-size: 11px; font-weight: 500;
+      color: var(--muted-text); background: var(--white);
+      padding: 6px 12px; border: 1px solid var(--muted);
+      opacity: 0; transition: opacity 0.3s ease; z-index: 999;
+    }
+    .section-indicator.visible { opacity: 1; }
+    .section-indicator span { color: var(--green); font-weight: 600; }
+
+    /* ═══ COPY TOAST ═══ */
+    .copy-toast {
+      position: fixed; bottom: var(--sp-8); left: 50%; transform: translateX(-50%) translateY(20px);
+      font-family: var(--font-mono); font-size: 12px; font-weight: 500;
+      background: var(--green); color: var(--cream); padding: 8px 20px;
+      opacity: 0; transition: opacity 0.3s ease, transform 0.3s ease; z-index: 1001;
+      pointer-events: none;
+    }
+    .copy-toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+    /* ═══ SECTION TAG ═══ */
+    .section-tag {
+      font-family: var(--font-mono); font-size: 11px; font-weight: 600;
+      text-transform: uppercase; letter-spacing: 0.1em;
+      color: var(--green); margin-bottom: var(--sp-3); display: block;
+    }
+
+    /* ═══ TYPOGRAPHY ═══ */
+    .display { font-family: var(--font-display); font-weight: 600; line-height: 1.1; color: var(--fg); }
+    .display-lg { font-size: clamp(36px, 5vw, 56px); letter-spacing: -0.02em; }
+    .display-md { font-size: clamp(28px, 3.5vw, 40px); }
+    .display-sm { font-size: clamp(22px, 2.5vw, 28px); }
+    .body-text { font-size: 15px; line-height: 1.65; }
+    .muted { color: var(--muted-text); }
+    .mono-label { font-family: var(--font-mono); font-size: 11px; font-weight: 500; letter-spacing: 0.05em; text-transform: uppercase; color: var(--muted-text); }
+
+    /* ═══ DIVIDERS ═══ */
+    .divider { border: none; border-top: 1px solid var(--muted); margin: var(--sp-6) 0; }
+    .divider-green { border: none; border-top: 2px solid var(--green); margin: var(--sp-4) 0; }
+    .divider-gold { border: none; border-top: 2px solid var(--gold); margin: var(--sp-4) 0; width: 60px; }
+
+    /* ═══ CARDS ═══ */
+    .card { background: var(--card); border: 1px solid var(--muted); border-radius: 8px; padding: var(--sp-4); }
+
+    /* ═══ GRID ═══ */
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: var(--sp-3); }
+    .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--sp-3); }
+    .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--sp-3); }
+    @media (max-width: 768px) { .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; } }
+
+    /* ═══ SWATCHES ═══ */
+    .swatch {
+      border-radius: 8px; padding: var(--sp-3); cursor: pointer;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      border: 1px solid var(--muted);
+    }
+    .swatch:hover { transform: translateY(-2px); box-shadow: 0 4px 16px rgba(0,0,0,0.08); }
+    .swatch-color { width: 100%; aspect-ratio: 2/1; border-radius: 4px; margin-bottom: var(--sp-2); }
+    .swatch-name { font-family: var(--font-body); font-weight: 600; font-size: 13px; color: var(--fg); }
+    .swatch-hex { font-family: var(--font-mono); font-size: 12px; color: var(--muted-text); margin-top: 4px; }
+    .swatch-use { font-size: 11px; color: var(--muted-text); margin-top: 8px; line-height: 1.4; }
+
+    /* ═══ BUTTONS (demo) ═══ */
+    .btn-demo { display: inline-block; font-family: var(--font-body); font-size: 13px; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; padding: 14px 28px; cursor: pointer; transition: transform 0.2s ease, box-shadow 0.2s ease; border: none; text-decoration: none; }
+    .btn-primary-demo { background: var(--green); color: var(--cream); }
+    .btn-primary-demo:hover { transform: translateY(-2px); box-shadow: 0 4px 16px rgba(24,80,15,0.3); }
+    .btn-secondary-demo { background: transparent; color: var(--green); border: 1px solid var(--green); }
+    .btn-secondary-demo:hover { background: var(--green); color: var(--cream); }
+    .btn-gold-demo { background: var(--gold); color: var(--white); }
+
+    /* ═══ REVEAL ═══ */
+    .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .reveal.revealed { opacity: 1; transform: translateY(0); }
+
+    /* ═══ TYPE SPECIMEN ═══ */
+    .specimen { padding: var(--sp-4); background: var(--secondary); border-radius: 8px; margin-bottom: var(--sp-2); }
+    .specimen-label { font-family: var(--font-mono); font-size: 10px; color: var(--muted-text); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: var(--sp-1); }
+
+    /* ═══ HEADER ═══ */
+    .guide-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: var(--sp-8); flex-wrap: wrap; gap: var(--sp-3); }
+    .guide-header-left { }
+    .guide-header-right { display: flex; gap: var(--sp-4); }
+    .data-label { }
+    .data-label-key { font-family: var(--font-mono); font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted-text); display: block; margin-bottom: 2px; }
+    .data-label-value { font-family: var(--font-mono); font-size: 12px; font-weight: 500; color: var(--fg); }
+
+    /* ═══ WORDMARK DEMO ═══ */
+    .wordmark-demo {
+      display: flex; align-items: center; justify-content: center;
+      padding: var(--sp-8) var(--sp-4); border-radius: 8px;
+    }
+    .wordmark-text {
+      font-family: var(--font-display); font-weight: 600;
+      letter-spacing: 0.2em; text-transform: uppercase;
+      line-height: 1; position: relative; display: inline-block;
+    }
+    .wordmark-text::after {
+      content: ''; position: absolute; bottom: -6px; left: 0;
+      right: 0.2em; height: 1px; opacity: 0.4;
+    }
+    .wordmark-text sup { font-size: 0.4em; font-weight: 500; letter-spacing: 0.05em; vertical-align: super; }
+
+    /* ═══ CHECKLIST ═══ */
+    .checklist { list-style: none; }
+    .checklist li { padding: 10px 0; border-bottom: 1px solid var(--muted); display: flex; align-items: center; gap: 12px; font-size: 14px; }
+    .checklist input[type="checkbox"] { width: 18px; height: 18px; accent-color: var(--green); cursor: pointer; flex-shrink: 0; }
+
+    /* ═══ VOICE LIST ═══ */
+    .voice-grid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--sp-4); }
+    @media (max-width: 768px) { .voice-grid { grid-template-columns: 1fr; } }
+    .voice-col h4 { font-family: var(--font-mono); font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: var(--sp-2); }
+    .voice-col.do h4 { color: var(--green); }
+    .voice-col.dont h4 { color: #B91C1C; }
+    .voice-col ul { list-style: none; }
+    .voice-col ul li { padding: 8px 0; border-bottom: 1px solid var(--muted); font-size: 14px; color: var(--fg); }
+
+    /* ═══ ANIMATION DEMO ═══ */
+    .anim-stage {
+      background: var(--secondary); border-radius: 8px;
+      padding: var(--sp-4); min-height: 120px;
+      display: flex; align-items: center; justify-content: center;
+      position: relative; overflow: hidden;
+    }
+    .replay-btn {
+      font-family: var(--font-mono); font-size: 11px; font-weight: 600;
+      text-transform: uppercase; letter-spacing: 0.08em;
+      background: var(--green); color: var(--cream);
+      border: none; padding: 8px 16px; cursor: pointer;
+      margin-top: var(--sp-2); border-radius: 4px;
+      transition: opacity 0.2s;
+    }
+    .replay-btn:hover { opacity: 0.85; }
+
+    /* ═══ ASSET MOCKUPS ═══ */
+    .mockup-frame { background: var(--secondary); border-radius: 8px; padding: var(--sp-4); overflow: hidden; }
+
+    /* ═══ REDUCED MOTION ═══ */
+    @media (prefers-reduced-motion: reduce) {
+      .reveal { opacity: 1; transform: none; transition: none; }
+      * { animation: none !important; transition-duration: 0s !important; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Scroll progress -->
+<div class="scroll-progress" id="scrollProgress"></div>
+
+<!-- Section indicator -->
+<div class="section-indicator" id="sectionIndicator">[ <span>001</span> / 014 ]</div>
+
+<!-- Copy toast -->
+<div class="copy-toast" id="copyToast">Copied</div>
+
+<div class="page">
+
+  <!-- ═══ HEADER ═══ -->
+  <header class="guide-header">
+    <div class="guide-header-left">
+      <div style="font-family: var(--font-display); font-weight: 600; font-size: 18px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--green); margin-bottom: 4px;">VENTURE<sup style="font-size: 0.5em; vertical-align: super;">310</sup></div>
+      <div class="mono-label" style="margin-top: 4px;">Visual Brand Guidelines</div>
+    </div>
+    <div class="guide-header-right">
+      <div class="data-label"><span class="data-label-key">Version</span><span class="data-label-value">1.0</span></div>
+      <div class="data-label"><span class="data-label-key">Date</span><span class="data-label-value">2025-02</span></div>
+      <div class="data-label"><span class="data-label-key">Status</span><span class="data-label-value" style="color: var(--green);">● Active</span></div>
+    </div>
+  </header>
+
+  <!-- ═══ HERO ═══ -->
+  <div style="margin-bottom: var(--sp-10);">
+    <h1 class="display display-lg" style="margin-bottom: var(--sp-3); max-width: 700px;">The Brand System for <span style="color: var(--green);">Venture 310</span></h1>
+    <p class="body-text muted" style="max-width: 560px; margin-bottom: var(--sp-3);">Every asset, every touchpoint, every pixel — governed by one system. Premium but approachable. Confident but never arrogant. Editorial quality, always.</p>
+    <p style="font-family: var(--font-display); font-style: italic; font-size: 18px; color: var(--green);">No exceptions.</p>
+  </div>
+
+  <hr class="divider-green">
+
+  <!-- ═══ TABLE OF CONTENTS ═══ -->
+  <nav style="margin-bottom: var(--sp-10);">
+    <p class="mono-label" style="margin-bottom: var(--sp-2);">Contents</p>
+    <div class="grid-2" style="font-size: 14px;">
+      <div>
+        <p style="margin-bottom: 6px;"><span style="color: var(--muted-text); font-family: var(--font-mono); font-size: 11px;">001</span> Brand Essence</p>
+        <p style="margin-bottom: 6px;"><span style="color: var(--muted-text); font-family: var(--font-mono); font-size: 11px;">002</span> Colour Palette</p>
+        <p style="margin-bottom: 6px;"><span style="color: var(--muted-text); font-family: var(--font-mono); font-size: 11px;">003</span> Typography</p>
+        <p style="margin-bottom: 6px;"><span style="color: var(--muted-text); font-family: var(--font-mono); font-size: 11px;">004</span> Spacing &amp; Layout</p>
+        <p style="margin-bottom: 6px;"><span style="color: var(--muted-text); font-family: var(--font-mono); font-size: 11px;">005</span> Components</p>
+        <p style="margin-bottom: 6px;"><span style="color: var(--muted-text); font-family: var(--font-mono); font-size: 11px;">006</span> Logo System</p>
+        <p style="margin-bottom: 6px;"><span style="color: var(--muted-text); font-family: var(--font-mono); font-size: 11px;">007</span> Voice &amp; Tone</p>
+      </div>
+      <div>
+        <p style="margin-bottom: 6px;"><span style="color: var(--muted-text); font-family: var(--font-mono); font-size: 11px;">008</span> Motion &amp; Animation</p>
+        <p style="margin-bottom: 6px;"><span style="color: var(--muted-text); font-family: var(--font-mono); font-size: 11px;">009</span> Anti-Slop Checklist</p>
+        <p style="margin-bottom: 6px;"><span style="color: var(--muted-text); font-family: var(--font-mono); font-size: 11px;">010</span> Business Card</p>
+        <p style="margin-bottom: 6px;"><span style="color: var(--muted-text); font-family: var(--font-mono); font-size: 11px;">011</span> Social Media Templates</p>
+        <p style="margin-bottom: 6px;"><span style="color: var(--muted-text); font-family: var(--font-mono); font-size: 11px;">012</span> Email Signature</p>
+        <p style="margin-bottom: 6px;"><span style="color: var(--muted-text); font-family: var(--font-mono); font-size: 11px;">013</span> Proposal / Invoice</p>
+        <p style="margin-bottom: 6px;"><span style="color: var(--muted-text); font-family: var(--font-mono); font-size: 11px;">014</span> Brand In Action</p>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ═══════════════════════════════════════════
+       [001] BRAND ESSENCE
+       ═══════════════════════════════════════════ -->
+  <section data-section="001" class="reveal">
+    <span class="section-tag">[001] Brand Essence</span>
+    <h2 class="display display-md" style="margin-bottom: var(--sp-3);">Premium but approachable.<br>Confident but never arrogant.</h2>
+    <p class="body-text muted" style="max-width: 600px; margin-bottom: var(--sp-4);">Venture 310 is a Dubai-based marketing agency that helps businesses scale attention, awareness, and profitability through storytelling. The brand sits at the intersection of editorial luxury and modern Gulf energy.</p>
+
+    <div class="grid-4" style="margin-top: var(--sp-4);">
+      <div class="card">
+        <p class="mono-label" style="margin-bottom: 8px; color: var(--green);">Personality</p>
+        <p style="font-family: var(--font-display); font-size: 20px; font-weight: 600;">Editorial</p>
+        <p class="muted" style="font-size: 13px; margin-top: 4px;">Magazine-quality visual language</p>
+      </div>
+      <div class="card">
+        <p class="mono-label" style="margin-bottom: 8px; color: var(--green);">Energy</p>
+        <p style="font-family: var(--font-display); font-size: 20px; font-weight: 600;">Modern Gulf</p>
+        <p class="muted" style="font-size: 13px; margin-top: 4px;">Dubai energy, international polish</p>
+      </div>
+      <div class="card">
+        <p class="mono-label" style="margin-bottom: 8px; color: var(--green);">Approach</p>
+        <p style="font-family: var(--font-display); font-size: 20px; font-weight: 600;">Confident</p>
+        <p class="muted" style="font-size: 13px; margin-top: 4px;">Understated, lets the work speak</p>
+      </div>
+      <div class="card">
+        <p class="mono-label" style="margin-bottom: 8px; color: var(--green);">Positioning</p>
+        <p style="font-family: var(--font-display); font-size: 20px; font-weight: 600;">Story-first</p>
+        <p class="muted" style="font-size: 13px; margin-top: 4px;">Narrative over metrics jargon</p>
+      </div>
+    </div>
+
+    <div style="background: var(--cream); border-radius: 8px; padding: var(--sp-4); margin-top: var(--sp-4);">
+      <p class="mono-label" style="margin-bottom: 8px;">Brand as a Person</p>
+      <p style="font-family: var(--font-display); font-style: italic; font-size: 18px; line-height: 1.5; color: var(--fg);">A well-dressed friend who knows everyone in the room. Not cold luxury — warm, knowing, and quietly impressive. Speaks to business owners as equals, not prospects. Always has a story that makes you think.</p>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════
+       [002] COLOUR PALETTE
+       ═══════════════════════════════════════════ -->
+  <section data-section="002" class="reveal">
+    <span class="section-tag">[002] Colour Palette</span>
+    <h2 class="display display-md" style="margin-bottom: var(--sp-2);">Seven colours. Clear hierarchy.</h2>
+    <p class="body-text muted" style="max-width: 540px; margin-bottom: var(--sp-4);">Green + Cream is the hero combination. Use it for all primary brand moments. Accents appear at 5–10% max.</p>
+
+    <p class="mono-label" style="margin-bottom: var(--sp-2);">Primary</p>
+    <div class="grid-2" style="margin-bottom: var(--sp-4);">
+      <div class="swatch" style="background: var(--white);">
+        <div class="swatch-color" style="background: #18500F;"></div>
+        <div class="swatch-name">Venture Green</div>
+        <div class="swatch-hex">#18500F</div>
+        <div class="swatch-use">Backgrounds, headers, CTAs, primary brand moments</div>
+      </div>
+      <div class="swatch" style="background: var(--white);">
+        <div class="swatch-color" style="background: #FAF0E7; border: 1px solid var(--muted);"></div>
+        <div class="swatch-name">Venture Cream</div>
+        <div class="swatch-hex">#FAF0E7</div>
+        <div class="swatch-use">Text on green, light backgrounds, cards</div>
+      </div>
+    </div>
+
+    <p class="mono-label" style="margin-bottom: var(--sp-2);">Extended</p>
+    <div class="grid-3" style="margin-bottom: var(--sp-4);">
+      <div class="swatch" style="background: var(--white);">
+        <div class="swatch-color" style="background: #0D2B08;"></div>
+        <div class="swatch-name">Deep Forest</div>
+        <div class="swatch-hex">#0D2B08</div>
+        <div class="swatch-use">Body text on light backgrounds</div>
+      </div>
+      <div class="swatch" style="background: var(--white);">
+        <div class="swatch-color" style="background: #FFFFFF; border: 1px solid var(--muted);"></div>
+        <div class="swatch-name">Clean White</div>
+        <div class="swatch-hex">#FFFFFF</div>
+        <div class="swatch-use">Page backgrounds, breathing space</div>
+      </div>
+      <div class="swatch" style="background: var(--white);">
+        <div class="swatch-color" style="background: #E4D6CC;"></div>
+        <div class="swatch-name">Stone</div>
+        <div class="swatch-hex">#E4D6CC</div>
+        <div class="swatch-use">Dividers, subtle backgrounds</div>
+      </div>
+    </div>
+
+    <p class="mono-label" style="margin-bottom: var(--sp-2);">Accents (5–10% max)</p>
+    <div class="grid-2">
+      <div class="swatch" style="background: var(--white);">
+        <div class="swatch-color" style="background: #2A9D8F;"></div>
+        <div class="swatch-name">Gulf Teal</div>
+        <div class="swatch-hex">#2A9D8F</div>
+        <div class="swatch-use">Accent links, hover states, highlights</div>
+      </div>
+      <div class="swatch" style="background: var(--white);">
+        <div class="swatch-color" style="background: #C9A227;"></div>
+        <div class="swatch-name">Desert Gold</div>
+        <div class="swatch-hex">#C9A227</div>
+        <div class="swatch-use">Premium accents, badges, special callouts</div>
+      </div>
+    </div>
+
+    <div style="background: var(--cream); border-radius: 8px; padding: var(--sp-3); margin-top: var(--sp-4);">
+      <p class="mono-label" style="margin-bottom: 8px;">Usage Rules</p>
+      <ul style="font-size: 14px; line-height: 1.8; padding-left: 20px; color: var(--fg);">
+        <li>Never place green text on cream at small sizes — use Deep Forest instead</li>
+        <li>Gulf Teal and Desert Gold are supporting only — never dominant</li>
+        <li>Prefer generous white/cream space over filling areas with colour</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════
+       [003] TYPOGRAPHY
+       ═══════════════════════════════════════════ -->
+  <section data-section="003" class="reveal">
+    <span class="section-tag">[003] Typography</span>
+    <h2 class="display display-md" style="margin-bottom: var(--sp-2);">Two fonts. Clear roles.</h2>
+    <p class="body-text muted" style="max-width: 540px; margin-bottom: var(--sp-4);">Cormorant Garamond for display, DM Sans for everything else. Weight and tracking create hierarchy — not size alone.</p>
+
+    <div class="grid-2" style="margin-bottom: var(--sp-4);">
+      <div>
+        <div class="specimen">
+          <div class="specimen-label">Display — Cormorant Garamond</div>
+          <p style="font-family: var(--font-display); font-weight: 600; font-size: 42px; letter-spacing: 0.08em; text-transform: uppercase; line-height: 1.1;">VENTURE</p>
+        </div>
+        <div class="specimen">
+          <div class="specimen-label">Weights: 400 / 500 / 600 / 700</div>
+          <p style="font-family: var(--font-display); font-size: 24px; line-height: 1.6;">
+            <span style="font-weight: 400;">Light touch</span> ·
+            <span style="font-weight: 500;">Medium presence</span> ·
+            <span style="font-weight: 600;">Strong voice</span> ·
+            <span style="font-weight: 700;">Bold statement</span>
+          </p>
+        </div>
+        <div class="specimen">
+          <div class="specimen-label">Italic</div>
+          <p style="font-family: var(--font-display); font-style: italic; font-size: 24px; line-height: 1.4;">Your story is your greatest competitive advantage</p>
+        </div>
+      </div>
+      <div>
+        <div class="specimen">
+          <div class="specimen-label">Body — DM Sans</div>
+          <p style="font-family: var(--font-body); font-size: 16px; line-height: 1.65;">We help ambitious businesses craft narratives that cut through noise — turning audiences into customers and customers into advocates.</p>
+        </div>
+        <div class="specimen">
+          <div class="specimen-label">UI / Labels — DM Sans 600</div>
+          <p style="font-family: var(--font-body); font-weight: 600; font-size: 12px; letter-spacing: 0.2em; text-transform: uppercase;">Book a Strategy Call</p>
+        </div>
+        <div class="specimen">
+          <div class="specimen-label">Mono — JetBrains Mono</div>
+          <p style="font-family: var(--font-mono); font-size: 13px;">[001] SECTION TAG · #18500F · v1.0</p>
+        </div>
+      </div>
+    </div>
+
+    <div style="background: var(--cream); border-radius: 8px; padding: var(--sp-3);">
+      <p class="mono-label" style="margin-bottom: 8px;">Type Rules</p>
+      <ul style="font-size: 14px; line-height: 1.8; padding-left: 20px;">
+        <li>Headlines: uppercase with letter-spacing 0.15em–0.25em for brand headers</li>
+        <li>Content headers: title case, tighter tracking</li>
+        <li>Body: 16–18px base, line-height 1.6–1.7</li>
+        <li>Max content width: 720px for readability</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════
+       [004] SPACING & LAYOUT
+       ═══════════════════════════════════════════ -->
+  <section data-section="004" class="reveal">
+    <span class="section-tag">[004] Spacing &amp; Layout</span>
+    <h2 class="display display-md" style="margin-bottom: var(--sp-2);">Generous whitespace. Asymmetric balance.</h2>
+    <p class="body-text muted" style="max-width: 540px; margin-bottom: var(--sp-4);">8px base grid. Let content breathe. Avoid perfectly centered everything — offset grids feel more editorial.</p>
+
+    <div class="grid-3" style="margin-bottom: var(--sp-4);">
+      <div class="card">
+        <p class="mono-label" style="margin-bottom: 8px;">Max Width</p>
+        <p style="font-family: var(--font-display); font-size: 28px; font-weight: 600;">1200px</p>
+        <p class="muted" style="font-size: 12px; margin-top: 4px;">Content container</p>
+      </div>
+      <div class="card">
+        <p class="mono-label" style="margin-bottom: 8px;">Text Width</p>
+        <p style="font-family: var(--font-display); font-size: 28px; font-weight: 600;">720px</p>
+        <p class="muted" style="font-size: 12px; margin-top: 4px;">Readability maximum</p>
+      </div>
+      <div class="card">
+        <p class="mono-label" style="margin-bottom: 8px;">Border Radius</p>
+        <p style="font-family: var(--font-display); font-size: 28px; font-weight: 600;">8–12px</p>
+        <p class="muted" style="font-size: 12px; margin-top: 4px;">Soft, not rounded</p>
+      </div>
+    </div>
+
+    <div class="card" style="margin-bottom: var(--sp-3);">
+      <p class="mono-label" style="margin-bottom: var(--sp-2);">Section Rhythm</p>
+      <p class="body-text" style="font-size: 14px;">Alternate between: full-bleed image sections → green branded sections → clean white content sections. Never stack two of the same type.</p>
+    </div>
+
+    <div class="card">
+      <p class="mono-label" style="margin-bottom: var(--sp-2);">Spacing Scale (8px base)</p>
+      <div style="display: flex; align-items: end; gap: 12px; flex-wrap: wrap; padding-top: 8px;">
+        <div style="text-align: center;"><div style="width: 24px; height: 8px; background: var(--green); border-radius: 2px;"></div><span style="font-family: var(--font-mono); font-size: 9px; color: var(--muted-text); display: block; margin-top: 4px;">8</span></div>
+        <div style="text-align: center;"><div style="width: 24px; height: 16px; background: var(--green); border-radius: 2px;"></div><span style="font-family: var(--font-mono); font-size: 9px; color: var(--muted-text); display: block; margin-top: 4px;">16</span></div>
+        <div style="text-align: center;"><div style="width: 24px; height: 24px; background: var(--green); border-radius: 2px;"></div><span style="font-family: var(--font-mono); font-size: 9px; color: var(--muted-text); display: block; margin-top: 4px;">24</span></div>
+        <div style="text-align: center;"><div style="width: 24px; height: 32px; background: var(--green); border-radius: 2px;"></div><span style="font-family: var(--font-mono); font-size: 9px; color: var(--muted-text); display: block; margin-top: 4px;">32</span></div>
+        <div style="text-align: center;"><div style="width: 24px; height: 48px; background: var(--green); border-radius: 2px;"></div><span style="font-family: var(--font-mono); font-size: 9px; color: var(--muted-text); display: block; margin-top: 4px;">48</span></div>
+        <div style="text-align: center;"><div style="width: 24px; height: 64px; background: var(--green); border-radius: 2px;"></div><span style="font-family: var(--font-mono); font-size: 9px; color: var(--muted-text); display: block; margin-top: 4px;">64</span></div>
+        <div style="text-align: center;"><div style="width: 24px; height: 80px; background: var(--green); border-radius: 2px;"></div><span style="font-family: var(--font-mono); font-size: 9px; color: var(--muted-text); display: block; margin-top: 4px;">80</span></div>
+        <div style="text-align: center;"><div style="width: 24px; height: 96px; background: var(--green); border-radius: 2px;"></div><span style="font-family: var(--font-mono); font-size: 9px; color: var(--muted-text); display: block; margin-top: 4px;">96</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════
+       [005] COMPONENTS
+       ═══════════════════════════════════════════ -->
+  <section data-section="005" class="reveal">
+    <span class="section-tag">[005] Components</span>
+    <h2 class="display display-md" style="margin-bottom: var(--sp-4);">Buttons, cards, dividers.</h2>
+
+    <p class="mono-label" style="margin-bottom: var(--sp-2);">Buttons</p>
+    <div style="display: flex; gap: 16px; flex-wrap: wrap; margin-bottom: var(--sp-4); align-items: center;">
+      <span class="btn-demo btn-primary-demo">Book a Strategy Call</span>
+      <span class="btn-demo btn-secondary-demo">View Services</span>
+      <span class="btn-demo btn-gold-demo">Premium Action</span>
+    </div>
+
+    <p class="mono-label" style="margin-bottom: var(--sp-2);">Cards</p>
+    <div class="grid-3" style="margin-bottom: var(--sp-4);">
+      <div class="card">
+        <p class="mono-label" style="color: var(--green); margin-bottom: 8px;">01</p>
+        <p style="font-family: var(--font-display); font-size: 20px; font-weight: 600; margin-bottom: 6px;">Service Title</p>
+        <p class="muted" style="font-size: 13px;">Brief description text that explains the value proposition.</p>
+      </div>
+      <div style="background: var(--green); border-radius: 8px; padding: var(--sp-4);">
+        <p style="font-family: var(--font-mono); font-size: 11px; color: var(--cream); opacity: 0.4; margin-bottom: 8px;">02</p>
+        <p style="font-family: var(--font-display); font-size: 20px; font-weight: 600; color: var(--cream); margin-bottom: 6px;">Green Card</p>
+        <p style="font-size: 13px; color: var(--cream); opacity: 0.6;">For featured or highlighted items.</p>
+      </div>
+      <div style="background: var(--cream); border: 1px solid var(--stone); border-radius: 8px; padding: var(--sp-4);">
+        <p style="font-family: var(--font-mono); font-size: 11px; color: var(--green); margin-bottom: 8px;">03</p>
+        <p style="font-family: var(--font-display); font-size: 20px; font-weight: 600; margin-bottom: 6px;">Cream Card</p>
+        <p class="muted" style="font-size: 13px;">Warm background for alternate sections.</p>
+      </div>
+    </div>
+
+    <p class="mono-label" style="margin-bottom: var(--sp-2);">Dividers</p>
+    <div style="background: var(--card); border-radius: 8px; padding: var(--sp-4);">
+      <p style="font-size: 12px; color: var(--muted-text); margin-bottom: 8px;">1px Stone — standard divider</p>
+      <hr class="divider">
+      <p style="font-size: 12px; color: var(--muted-text); margin-bottom: 8px;">2px Green — section accent</p>
+      <hr class="divider-green">
+      <p style="font-size: 12px; color: var(--muted-text); margin-bottom: 8px;">2px Gold — premium accent (60px wide)</p>
+      <hr class="divider-gold">
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════
+       [006] LOGO SYSTEM
+       ═══════════════════════════════════════════ -->
+  <section data-section="006" class="reveal">
+    <span class="section-tag">[006] Logo System</span>
+    <h2 class="display display-md" style="margin-bottom: var(--sp-4);">The wordmark is the brand.</h2>
+
+    <div class="grid-2" style="margin-bottom: var(--sp-4);">
+      <div class="wordmark-demo" style="background: var(--green);">
+        <span class="wordmark-text" style="font-size: 42px; color: var(--cream);">VENTURE<sup>310</sup><style>.wordmark-demo:first-of-type .wordmark-text::after{background:var(--cream)}</style></span>
+      </div>
+      <div class="wordmark-demo" style="background: var(--white); border: 1px solid var(--muted);">
+        <span class="wordmark-text" style="font-size: 42px; color: var(--green);">VENTURE<sup>310</sup></span>
+      </div>
+    </div>
+
+    <div class="grid-2">
+      <div class="wordmark-demo" style="background: var(--cream);">
+        <span class="wordmark-text" style="font-size: 42px; color: var(--deep-forest);">VENTURE<sup>310</sup></span>
+      </div>
+      <div class="wordmark-demo" style="background: var(--deep-forest);">
+        <span class="wordmark-text" style="font-size: 42px; color: var(--cream);">VENTURE<sup>310</sup></span>
+      </div>
+    </div>
+
+    <div style="background: var(--cream); border-radius: 8px; padding: var(--sp-3); margin-top: var(--sp-4);">
+      <p class="mono-label" style="margin-bottom: 8px;">Wordmark Rules</p>
+      <ul style="font-size: 14px; line-height: 1.8; padding-left: 20px;">
+        <li>Cormorant Garamond, weight 600, uppercase, letter-spacing 0.2em</li>
+        <li>310 rendered as superscript, slightly smaller, no underline</li>
+        <li>Thin underline rule beneath "VENTURE" only</li>
+        <li>Never break across lines. Always a single unit.</li>
+        <li>Minimum clear space: 1× the height of the "V" on all sides</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════
+       [007] VOICE & TONE
+       ═══════════════════════════════════════════ -->
+  <section data-section="007" class="reveal">
+    <span class="section-tag">[007] Voice &amp; Tone</span>
+    <h2 class="display display-md" style="margin-bottom: var(--sp-4);">Direct. Assured. Never salesy.</h2>
+
+    <div class="voice-grid" style="margin-bottom: var(--sp-4);">
+      <div class="voice-col do">
+        <h4>✓ Use</h4>
+        <ul>
+          <li>"Your story is your greatest competitive advantage"</li>
+          <li>"Attention, awareness, profitability"</li>
+          <li>"Storytelling" instead of "content strategy"</li>
+          <li>"Attention" instead of "impressions"</li>
+          <li>Short, punchy sentences mixed with narrative flow</li>
+          <li>Speaking <em>to</em> business owners, not <em>at</em> them</li>
+        </ul>
+      </div>
+      <div class="voice-col dont">
+        <h4>✗ Never</h4>
+        <ul>
+          <li>"Trusted partner"</li>
+          <li>"Committed to excellence"</li>
+          <li>"Your journey starts here"</li>
+          <li>"We understand that..."</li>
+          <li>Hype-driven language or fake urgency</li>
+          <li>Marketing jargon (KPIs, synergy, leverage)</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="card">
+      <p class="mono-label" style="margin-bottom: 8px;">Sentence Rhythm Example</p>
+      <p style="font-family: var(--font-display); font-style: italic; font-size: 18px; line-height: 1.5; max-width: 600px;">The businesses that win aren't the biggest. They're the ones that tell their story better than anyone else. We're the team that makes that happen.</p>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════
+       [008] MOTION & ANIMATION
+       ═══════════════════════════════════════════ -->
+  <section data-section="008" class="reveal">
+    <span class="section-tag">[008] Motion &amp; Animation</span>
+    <h2 class="display display-md" style="margin-bottom: var(--sp-2);">Confident and unhurried.</h2>
+    <p class="body-text muted" style="max-width: 500px; margin-bottom: var(--sp-4);">Ease-out curves, 300–500ms durations. Motion should feel assured, never frantic.</p>
+
+    <div class="grid-2">
+      <div>
+        <p class="mono-label" style="margin-bottom: var(--sp-1);">Fade Up (Scroll Reveal)</p>
+        <div class="anim-stage" id="fadeUpStage">
+          <div id="fadeUpDemo" style="font-family: var(--font-display); font-size: 28px; font-weight: 600; color: var(--green); opacity: 0; transform: translateY(20px); transition: opacity 0.5s ease-out, transform 0.5s ease-out;">Your Story</div>
+        </div>
+        <button class="replay-btn" onclick="replayFadeUp()">↻ Replay</button>
+      </div>
+      <div>
+        <p class="mono-label" style="margin-bottom: var(--sp-1);">Hover Scale (Buttons)</p>
+        <div class="anim-stage">
+          <span class="btn-demo btn-primary-demo">Hover Me</span>
+        </div>
+        <p style="font-size: 12px; color: var(--muted-text); margin-top: 8px;">Scale 1.02, 200ms ease, subtle shadow increase</p>
+      </div>
+    </div>
+
+    <div style="background: var(--cream); border-radius: 8px; padding: var(--sp-3); margin-top: var(--sp-4);">
+      <p class="mono-label" style="margin-bottom: 8px;">Motion Rules</p>
+      <ul style="font-size: 14px; line-height: 1.8; padding-left: 20px;">
+        <li>Entrance: fade-up, staggered for groups (80–100ms between items)</li>
+        <li>Hover: gentle scale (1.02) or colour shift, never jarring</li>
+        <li>Durations: 300–500ms for reveals, 200ms for hover states</li>
+        <li>Easing: ease-out for entrances, ease for hover</li>
+        <li>Respect <code>prefers-reduced-motion</code> — disable all animations</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════
+       [009] ANTI-SLOP CHECKLIST
+       ═══════════════════════════════════════════ -->
+  <section data-section="009" class="reveal">
+    <span class="section-tag">[009] Anti-Slop Checklist</span>
+    <h2 class="display display-md" style="margin-bottom: var(--sp-4);">Quality gate. Every asset. No exceptions.</h2>
+
+    <div class="grid-2">
+      <div>
+        <p class="mono-label" style="margin-bottom: var(--sp-2);">Visual</p>
+        <ul class="checklist">
+          <li><input type="checkbox"> Green + Cream used for primary brand moments</li>
+          <li><input type="checkbox"> No green text on cream at small sizes</li>
+          <li><input type="checkbox"> Accents at 5–10% of composition max</li>
+          <li><input type="checkbox"> Cormorant for display, DM Sans for body</li>
+          <li><input type="checkbox"> Headlines tracked and uppercase where appropriate</li>
+          <li><input type="checkbox"> Generous whitespace — nothing cramped</li>
+          <li><input type="checkbox"> Border radius 8–12px on cards</li>
+          <li><input type="checkbox"> Images warm, aspirational, Dubai-contextual</li>
+        </ul>
+      </div>
+      <div>
+        <p class="mono-label" style="margin-bottom: var(--sp-2);">Brand &amp; Voice</p>
+        <ul class="checklist">
+          <li><input type="checkbox"> No banned phrases ("trusted partner", "excellence")</li>
+          <li><input type="checkbox"> Speaks to owners, not at prospects</li>
+          <li><input type="checkbox"> "Storytelling" not "content strategy"</li>
+          <li><input type="checkbox"> Copy couldn't be swapped to another agency</li>
+          <li><input type="checkbox"> Value proposition visible within 3 seconds</li>
+          <li><input type="checkbox"> CTA is clear and proportional to commitment</li>
+          <li><input type="checkbox"> Animations ease-out, 300–500ms</li>
+          <li><input type="checkbox"> Reduced-motion users see no animation</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════
+       [010] BUSINESS CARD
+       ═══════════════════════════════════════════ -->
+  <section data-section="010" class="reveal">
+    <span class="section-tag">[010] Business Card</span>
+    <h2 class="display display-md" style="margin-bottom: var(--sp-4);">Front and back.</h2>
+
+    <div class="grid-2">
+      <!-- Front -->
+      <div style="background: var(--green); border-radius: 8px; padding: 48px 40px; aspect-ratio: 3.5/2; display: flex; flex-direction: column; justify-content: space-between;">
+        <div style="font-family: var(--font-display); font-weight: 600; font-size: 18px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--cream); position: relative; display: inline-block;">VENTURE<sup style="font-size: 0.45em; vertical-align: super;">310</sup><div style="width: 70%; height: 1px; background: var(--cream); opacity: 0.3; margin-top: 6px;"></div></div>
+        <p style="font-family: var(--font-body); font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--cream); opacity: 0.5;">Dubai, UAE</p>
+      </div>
+      <!-- Back -->
+      <div style="background: var(--cream); border: 1px solid var(--stone); border-radius: 8px; padding: 48px 40px; aspect-ratio: 3.5/2; display: flex; flex-direction: column; justify-content: space-between;">
+        <div>
+          <p style="font-family: var(--font-display); font-weight: 600; font-size: 16px; color: var(--deep-forest);">Conrad</p>
+          <p style="font-family: var(--font-body); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted-text);">Founder</p>
+        </div>
+        <div style="font-family: var(--font-body); font-size: 11px; color: var(--muted-text); line-height: 1.8;">
+          <p>hello@venture310.ae</p>
+          <p>venture310.ae</p>
+          <p>@venture310.ae</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════
+       [011] SOCIAL MEDIA TEMPLATES
+       ═══════════════════════════════════════════ -->
+  <section data-section="011" class="reveal">
+    <span class="section-tag">[011] Social Media Templates</span>
+    <h2 class="display display-md" style="margin-bottom: var(--sp-2);">Five formats. One system.</h2>
+    <p class="body-text muted" style="max-width: 480px; margin-bottom: var(--sp-4);">Instagram posts, stories, carousels, and LinkedIn — all following the same brand rules.</p>
+
+    <div class="grid-3" style="margin-bottom: var(--sp-3);">
+      <div class="card" style="text-align: center;">
+        <div style="background: var(--green); border-radius: 4px; aspect-ratio: 1; display: flex; align-items: center; justify-content: center; margin-bottom: 12px;">
+          <span style="font-family: var(--font-display); font-weight: 600; font-size: 18px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--cream);">VENTURE<sup style="font-size: 0.5em;">310</sup></span>
+        </div>
+        <p class="mono-label">Instagram Brand</p>
+        <p style="font-size: 12px; color: var(--muted-text);">1080 × 1080</p>
+      </div>
+      <div class="card" style="text-align: center;">
+        <div style="background: var(--cream); border: 1px solid var(--stone); border-radius: 4px; aspect-ratio: 1; display: flex; align-items: center; justify-content: center; margin-bottom: 12px; padding: 16px;">
+          <span style="font-family: var(--font-display); font-style: italic; font-size: 14px; color: var(--deep-forest); text-align: center; line-height: 1.4;">"Your story is your greatest competitive advantage"</span>
+        </div>
+        <p class="mono-label">Editorial Quote</p>
+        <p style="font-size: 12px; color: var(--muted-text);">1080 × 1080</p>
+      </div>
+      <div class="card" style="text-align: center;">
+        <div style="background: var(--green); border-radius: 4px; aspect-ratio: 1; display: flex; align-items: center; justify-content: center; margin-bottom: 12px;">
+          <span style="font-family: var(--font-display); font-weight: 600; font-size: 14px; color: var(--cream);">01</span>
+        </div>
+        <p class="mono-label">Carousel Cover</p>
+        <p style="font-size: 12px; color: var(--muted-text);">1080 × 1080</p>
+      </div>
+    </div>
+
+    <div class="grid-2">
+      <div class="card" style="text-align: center;">
+        <div style="background: var(--green); border-radius: 4px; aspect-ratio: 9/16; max-height: 200px; display: flex; align-items: center; justify-content: center; margin-bottom: 12px;">
+          <span style="font-family: var(--font-display); font-weight: 600; font-size: 14px; color: var(--cream);">BOOK A<br>STRATEGY CALL</span>
+        </div>
+        <p class="mono-label">Story CTA</p>
+        <p style="font-size: 12px; color: var(--muted-text);">1080 × 1920</p>
+      </div>
+      <div class="card" style="text-align: center;">
+        <div style="background: var(--white); border: 1px solid var(--stone); border-radius: 4px; aspect-ratio: 1200/628; display: flex; align-items: center; justify-content: center; margin-bottom: 12px; padding: 16px;">
+          <span style="font-family: var(--font-display); font-weight: 600; font-size: 14px; color: var(--deep-forest);">What We Do</span>
+        </div>
+        <p class="mono-label">LinkedIn Services</p>
+        <p style="font-size: 12px; color: var(--muted-text);">1200 × 628</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════
+       [012] EMAIL SIGNATURE
+       ═══════════════════════════════════════════ -->
+  <section data-section="012" class="reveal">
+    <span class="section-tag">[012] Email Signature</span>
+    <h2 class="display display-md" style="margin-bottom: var(--sp-4);">Clean. Professional. On-brand.</h2>
+
+    <div class="mockup-frame" style="max-width: 500px;">
+      <div style="padding: 20px; border-left: 3px solid var(--green);">
+        <p style="font-family: var(--font-display); font-weight: 600; font-size: 16px; color: var(--deep-forest);">Conrad</p>
+        <p style="font-family: var(--font-body); font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted-text); margin-bottom: 12px;">Founder · Venture 310</p>
+        <div style="border-top: 1px solid var(--stone); padding-top: 12px;">
+          <p style="font-size: 12px; color: var(--muted-text); line-height: 1.6;">hello@venture310.ae</p>
+          <p style="font-size: 12px; color: var(--muted-text); line-height: 1.6;">venture310.ae · @venture310.ae</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════
+       [013] PROPOSAL / INVOICE
+       ═══════════════════════════════════════════ -->
+  <section data-section="013" class="reveal">
+    <span class="section-tag">[013] Proposal / Invoice</span>
+    <h2 class="display display-md" style="margin-bottom: var(--sp-4);">Financial documents follow the system.</h2>
+
+    <div class="mockup-frame" style="max-width: 600px; padding: var(--sp-6);">
+      <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: var(--sp-6);">
+        <div style="font-family: var(--font-display); font-weight: 600; font-size: 16px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--green);">VENTURE<sup style="font-size: 0.5em; vertical-align: super;">310</sup></div>
+        <div style="text-align: right;">
+          <p style="font-family: var(--font-body); font-weight: 600; font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--green);">Invoice</p>
+          <p style="font-family: var(--font-mono); font-size: 11px; color: var(--muted-text);">#V310-001</p>
+        </div>
+      </div>
+      <hr style="border: none; border-top: 2px solid var(--green); margin-bottom: var(--sp-4);">
+      <div style="display: flex; justify-content: space-between; margin-bottom: var(--sp-4);">
+        <div><p class="mono-label">Bill To</p><p style="font-size: 14px; margin-top: 4px;">Client Name<br>Dubai, UAE</p></div>
+        <div style="text-align: right;"><p class="mono-label">Date</p><p style="font-size: 14px; margin-top: 4px;">February 2025</p></div>
+      </div>
+      <div style="border: 1px solid var(--muted); border-radius: 4px; overflow: hidden;">
+        <div style="display: grid; grid-template-columns: 1fr auto; padding: 12px 16px; background: var(--cream); font-size: 11px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted-text);">
+          <span>Description</span><span>Amount</span>
+        </div>
+        <div style="display: grid; grid-template-columns: 1fr auto; padding: 14px 16px; font-size: 14px; border-top: 1px solid var(--muted);">
+          <span>Brand Strategy & Positioning</span><span style="font-family: var(--font-mono);">AED 8,500</span>
+        </div>
+        <div style="display: grid; grid-template-columns: 1fr auto; padding: 14px 16px; font-size: 14px; border-top: 1px solid var(--muted);">
+          <span>Social Media Management (Monthly)</span><span style="font-family: var(--font-mono);">AED 5,000</span>
+        </div>
+        <div style="display: grid; grid-template-columns: 1fr auto; padding: 14px 16px; font-size: 14px; border-top: 2px solid var(--green); background: var(--cream); font-weight: 600;">
+          <span>Total</span><span style="font-family: var(--font-mono); color: var(--green);">AED 13,500</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════
+       [014] BRAND IN ACTION
+       ═══════════════════════════════════════════ -->
+  <section data-section="014" class="reveal">
+    <span class="section-tag">[014] Brand In Action</span>
+    <h2 class="display display-md" style="margin-bottom: var(--sp-2);">The complete system, composed.</h2>
+    <p class="body-text muted" style="max-width: 500px; margin-bottom: var(--sp-4);">A hero section showing all brand elements working together — typography, colour, spacing, voice.</p>
+
+    <div style="background: var(--green); border-radius: 8px; overflow: hidden; position: relative;">
+      <div style="padding: clamp(48px, 6vw, 80px);">
+        <!-- Nav mock -->
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 64px;">
+          <span style="font-family: var(--font-display); font-weight: 600; font-size: 14px; letter-spacing: 0.25em; text-transform: uppercase; color: var(--cream);">VENTURE<sup style="font-size: 0.5em; vertical-align: super;">310</sup></span>
+          <div style="display: flex; gap: 24px; align-items: center;">
+            <span style="font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--cream); opacity: 0.5;">Services</span>
+            <span style="font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--cream); opacity: 0.5;">About</span>
+            <span style="display: inline-block; font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; background: var(--cream); color: var(--green); padding: 10px 20px;">Book a Call</span>
+          </div>
+        </div>
+        <!-- Hero content -->
+        <div style="max-width: 550px;">
+          <p style="font-family: var(--font-body); font-size: 10px; font-weight: 500; letter-spacing: 0.3em; text-transform: uppercase; color: var(--cream); opacity: 0.4; margin-bottom: 20px;">Dubai Marketing Agency</p>
+          <h1 style="font-family: var(--font-display); font-weight: 500; font-size: clamp(28px, 4vw, 44px); line-height: 1.1; color: var(--cream); margin-bottom: 20px;">Your story is your greatest competitive advantage</h1>
+          <div style="width: 50px; height: 1px; background: var(--cream); opacity: 0.2; margin-bottom: 20px;"></div>
+          <p style="font-size: 14px; color: var(--cream); opacity: 0.55; line-height: 1.65; margin-bottom: 24px; max-width: 400px;">We help ambitious businesses craft narratives that cut through noise.</p>
+          <div style="display: flex; gap: 12px;">
+            <span style="display: inline-block; font-size: 11px; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; background: var(--cream); color: var(--green); padding: 12px 24px;">Book a Strategy Call</span>
+            <span style="display: inline-block; font-size: 11px; font-weight: 500; letter-spacing: 0.15em; text-transform: uppercase; color: var(--cream); padding: 12px 24px; border: 1px solid rgba(250,240,231,0.2);">Our Services</span>
+          </div>
+        </div>
+      </div>
+      <!-- Ghost 310 -->
+      <div style="position: absolute; bottom: -0.1em; right: -0.02em; font-family: var(--font-display); font-weight: 700; font-size: clamp(120px, 16vw, 200px); color: var(--cream); opacity: 0.03; line-height: 1; pointer-events: none;">310</div>
+    </div>
+  </section>
+
+  <!-- ═══ FOOTER ═══ -->
+  <footer style="margin-top: var(--sp-15); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: var(--sp-3);">
+    <div style="font-family: var(--font-display); font-weight: 600; font-size: 14px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--green);">VENTURE<sup style="font-size: 0.5em; vertical-align: super;">310</sup></div>
+    <div style="display: flex; gap: var(--sp-4);">
+      <div class="data-label"><span class="data-label-key">V</span><span class="data-label-value">1.0</span></div>
+      <div class="data-label"><span class="data-label-key">D</span><span class="data-label-value">2025-02</span></div>
+    </div>
+    <p class="mono-label">Living document. Updates as brand evolves.</p>
+  </footer>
+
+</div>
+
+<script>
+  // ═══ SCROLL PROGRESS ═══
+  const progressBar = document.getElementById('scrollProgress');
+  const indicator = document.getElementById('sectionIndicator');
+  const sections = document.querySelectorAll('[data-section]');
+
+  window.addEventListener('scroll', () => {
+    const scrollTop = window.scrollY;
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    progressBar.style.width = (scrollTop / docHeight * 100) + '%';
+
+    indicator.classList.toggle('visible', scrollTop > 300);
+
+    let current = '001';
+    sections.forEach(s => {
+      if (s.getBoundingClientRect().top < window.innerHeight * 0.4) current = s.dataset.section;
+    });
+    indicator.innerHTML = '[ <span>' + current + '</span> / 014 ]';
+  }, { passive: true });
+
+  // ═══ SCROLL REVEAL ═══
+  const ro = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('revealed'); } });
+  }, { threshold: 0.08 });
+  document.querySelectorAll('.reveal').forEach(el => ro.observe(el));
+
+  // ═══ CLICK TO COPY ═══
+  const toast = document.getElementById('copyToast');
+  let tt;
+  document.querySelectorAll('.swatch').forEach(s => {
+    s.addEventListener('click', () => {
+      const hex = s.querySelector('.swatch-hex');
+      if (hex) {
+        navigator.clipboard.writeText(hex.textContent.trim()).then(() => {
+          toast.textContent = 'Copied ' + hex.textContent.trim();
+          toast.classList.add('show');
+          clearTimeout(tt);
+          tt = setTimeout(() => toast.classList.remove('show'), 1500);
+        });
+      }
+    });
+  });
+
+  // ═══ ANIMATION REPLAYS ═══
+  function replayFadeUp() {
+    const el = document.getElementById('fadeUpDemo');
+    el.style.transition = 'none';
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(20px)';
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        el.style.transition = 'opacity 0.5s ease-out, transform 0.5s ease-out';
+        el.style.opacity = '1';
+        el.style.transform = 'translateY(0)';
+      });
+    });
+  }
+  // Auto-play on load
+  setTimeout(replayFadeUp, 500);
+
+  // ═══ REDUCED MOTION ═══
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    document.querySelectorAll('.reveal').forEach(el => {
+      el.classList.add('revealed');
+      el.style.transition = 'none';
+    });
+  }
+</script>
+</body>
+</html>
